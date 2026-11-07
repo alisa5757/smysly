@@ -1,0 +1,3865 @@
+<!doctype html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0b0e" id="meta-theme-color">
+  <title>Смыслы</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&family=Literata:ital,opsz,wght@0,7..72,300;0,7..72,400;0,7..72,500;1,7..72,300;1,7..72,400&family=Nunito:wght@300;400;500;600&family=Onest:wght@300;400;500;600&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap">
+  <style>
+    :root {
+      --bg: #0b0b0e;
+      --sf: #131319;
+      --sf-2: #1a1a22;
+      --ln: rgba(255, 255, 255, 0.07);
+      --ln-strong: rgba(255, 255, 255, 0.14);
+      --tx: #e8e6e3;
+      --tx-strong: #ffffff;
+      --mu: rgba(232, 230, 227, 0.48);
+      --ft: rgba(232, 230, 227, 0.22);
+      --ac: #d4a373;
+      --ac-fg: #0b0b0e;
+      --ac-soft: rgba(212, 163, 115, 0.14);
+      --dg: #e07a70;
+      --hover-bg: rgba(255, 255, 255, 0.05);
+      --code-bg: rgba(255, 255, 255, 0.06);
+      --bar-bg: rgba(19, 19, 25, 0.94);
+      --bar-collapsed-bg: rgba(19, 19, 25, 0.72);
+      --sheet-backdrop: rgba(5, 5, 8, 0.78);
+      --sheet-shadow: 0 -20px 60px rgba(0, 0, 0, 0.7);
+      --toast-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      --font-main: "Onest", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-size: 32px;
+      --line-height: 1.45;
+      --max-w: 680px;
+      --sa-t: env(safe-area-inset-top, 0px);
+      --sa-b: env(safe-area-inset-bottom, 0px);
+      --r-s: 10px;
+      --r-m: 14px;
+      --r-p: 999px;
+      color-scheme: dark;
+      box-sizing: border-box;
+    }
+
+    /* Светлая тема: тёпло-молочный фон и глубокий тёмно-коричневый шрифт */
+    html[data-theme="light"] {
+      --bg: #f7f2e7;
+      --sf: #efe8d8;
+      --sf-2: #e6decb;
+      --ln: rgba(54, 35, 22, 0.09);
+      --ln-strong: rgba(54, 35, 22, 0.18);
+      --tx: #2c1d13;
+      --tx-strong: #1a0f08;
+      --mu: rgba(44, 29, 19, 0.62);
+      --ft: rgba(44, 29, 19, 0.34);
+      --ac: #9c5a25;
+      --ac-fg: #fbf8f3;
+      --ac-soft: rgba(156, 90, 37, 0.14);
+      --dg: #b8443a;
+      --hover-bg: rgba(44, 29, 19, 0.06);
+      --code-bg: rgba(44, 29, 19, 0.07);
+      --bar-bg: rgba(239, 232, 216, 0.94);
+      --bar-collapsed-bg: rgba(239, 232, 216, 0.85);
+      --sheet-backdrop: rgba(28, 18, 12, 0.42);
+      --sheet-shadow: 0 -20px 60px rgba(44, 29, 19, 0.18);
+      --toast-shadow: 0 10px 30px rgba(44, 29, 19, 0.18);
+      color-scheme: light;
+    }
+
+    *, *::before, *::after {
+      box-sizing: inherit;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--tx);
+      font-family: var(--font-main);
+      min-height: 100dvh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-text-size-adjust: 100%;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    body.lock {
+      overflow: hidden;
+    }
+
+    button {
+      font: inherit;
+      color: inherit;
+      background: none;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button:disabled {
+      opacity: 0.25;
+      cursor: default;
+    }
+
+    input, select, textarea {
+      font: inherit;
+      font-size: 15px;
+      color: var(--tx);
+      background: var(--sf);
+      border: 1px solid var(--ln);
+      border-radius: var(--r-s);
+      padding: 10px 12px;
+      width: 100%;
+      min-width: 0;
+      outline: none;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--ac);
+    }
+
+    textarea {
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      background: var(--ln-strong);
+      height: 4px;
+      border: 0;
+      padding: 0;
+      border-radius: 2px;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--ac);
+      cursor: pointer;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--ac);
+      border: 0;
+      cursor: pointer;
+    }
+
+    input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      padding: 0;
+      accent-color: var(--ac);
+      flex: none;
+      cursor: pointer;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    .mono {
+      font-variant-numeric: tabular-nums;
+      font-family: "JetBrains Mono", monospace;
+    }
+
+    /* ——— ВЕРХНЯЯ МИКРО-ПАНЕЛЬ УПРАВЛЕНИЯ (НЕЗАМЕТНАЯ) ——— */
+    .top-rail {
+      position: fixed;
+      top: calc(14px + var(--sa-t));
+      left: 0;
+      right: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 22px;
+      pointer-events: none;
+      transition: opacity 0.45s ease;
+    }
+
+    body.idle .top-rail {
+      opacity: 0.14;
+    }
+
+    .top-rail:hover,
+    .top-rail:focus-within {
+      opacity: 1 !important;
+    }
+
+    .rail-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      pointer-events: auto;
+    }
+
+    .ghost-btn {
+      position: relative;
+      width: 34px;
+      height: 34px;
+      border-radius: var(--r-s);
+      display: grid;
+      place-items: center;
+      color: var(--mu);
+      opacity: 0.48;
+      transition: opacity 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .ghost-btn:hover,
+    .ghost-btn.active {
+      opacity: 0.95;
+      color: var(--tx);
+      background: var(--hover-bg);
+    }
+
+    .ghost-btn.mode-active {
+      opacity: 0.95;
+      color: var(--ac);
+      background: var(--ac-soft);
+    }
+
+    .ghost-btn svg {
+      width: 17px;
+      height: 17px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .rail-badge {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      min-width: 13px;
+      height: 13px;
+      padding: 0 3px;
+      border-radius: 999px;
+      background: var(--ac);
+      color: var(--ac-fg);
+      font-size: 9px;
+      font-weight: 600;
+      display: grid;
+      place-items: center;
+      line-height: 1;
+    }
+
+    /* ——— ГЛАВНЫЙ ХОЛСТ СЛАЙД-ШОУ (МАКСИМУМ ПУСТОГО ПРОСТРАНСТВА) ——— */
+    #stage {
+      min-height: 100dvh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: calc(80px + var(--sa-t)) 28px calc(110px + var(--sa-b));
+      position: relative;
+      user-select: text;
+    }
+
+    .slide-viewport {
+      width: 100%;
+      max-width: var(--max-w);
+      min-height: 46vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      position: relative;
+    }
+
+    /* Текст мысли: строго выравнивание по левому краю, чистый текст, CSS-переход */
+    .thought-card {
+      width: 100%;
+      text-align: left;
+      font-family: var(--font-main);
+      font-size: var(--font-size);
+      line-height: var(--line-height);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--tx);
+      overflow-wrap: anywhere;
+      word-break: normal;
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+      transition: opacity 0.36s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.36s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, transform;
+    }
+
+    .thought-card.enter-next {
+      animation: slideInNext 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .thought-card.enter-prev {
+      animation: slideInPrev 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes slideInNext {
+      from {
+        opacity: 0;
+        transform: translate3d(22px, 0, 0);
+      }
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes slideInPrev {
+      from {
+        opacity: 0;
+        transform: translate3d(-22px, 0, 0);
+      }
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    /* Чистый инлайн-markdown внутри мысли */
+    .thought-card p {
+      margin: 0;
+      padding: 0;
+      text-align: left;
+    }
+
+    .thought-card p + p {
+      margin-top: 0.65em;
+    }
+
+    .thought-card strong, .thought-card b {
+      font-weight: 600;
+      color: var(--tx-strong);
+    }
+
+    .thought-card em, .thought-card i {
+      font-style: italic;
+    }
+
+    .thought-card code {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.86em;
+      background: var(--code-bg);
+      padding: 0.1em 0.35em;
+      border-radius: 5px;
+    }
+
+    .thought-card a {
+      color: var(--ac);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .thought-card mark {
+      background: var(--ac-soft);
+      color: inherit;
+      padding: 0 0.2em;
+      border-radius: 3px;
+    }
+
+    /* Нижний ряд микро-действий под слайдом: рупор, копирование, закладка, разделение */
+    .megaphone-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .horn-btn {
+      width: 24px;
+      height: 24px;
+      display: inline-grid;
+      place-items: center;
+      color: var(--tx);
+      opacity: 0.18;
+      border-radius: 6px;
+      transition: opacity 0.25s ease, color 0.25s ease, transform 0.2s ease, background 0.2s ease;
+    }
+
+    .horn-btn:hover {
+      opacity: 0.65;
+      background: var(--hover-bg);
+    }
+
+    .horn-btn:active {
+      transform: scale(0.92);
+    }
+
+    .horn-btn.speaking,
+    .horn-btn.bookmarked,
+    .horn-btn.copied {
+      opacity: 0.85;
+      color: var(--ac);
+    }
+
+    .horn-btn svg {
+      width: 13px;
+      height: 13px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.65;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .horn-btn.bookmarked svg {
+      fill: currentColor;
+    }
+
+    /* Микро-кнопка разбиения текущей мысли (если хочется разделить на лету) */
+    .micro-action-btn {
+      width: 24px;
+      height: 24px;
+      display: inline-grid;
+      place-items: center;
+      color: var(--tx);
+      opacity: 0.12;
+      border-radius: 6px;
+      transition: opacity 0.25s ease, color 0.25s ease, background 0.2s ease;
+    }
+
+    .micro-action-btn:hover {
+      opacity: 0.55;
+      background: var(--hover-bg);
+    }
+
+    .micro-action-btn svg {
+      width: 12px;
+      height: 12px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ——— НАВИГАЦИЯ СЛАЙД-ШОУ (< и >) ——— */
+    .nav-controls {
+      width: 100%;
+      max-width: var(--max-w);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 48px;
+      transition: opacity 0.4s ease;
+    }
+
+    body.idle .nav-controls {
+      opacity: 0.22;
+    }
+
+    .nav-controls:hover {
+      opacity: 1 !important;
+    }
+
+    .nav-arrow {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--r-s);
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--mu);
+      opacity: 0.55;
+      transition: opacity 0.2s ease, background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+      user-select: none;
+    }
+
+    .nav-arrow:hover:not(:disabled) {
+      opacity: 1;
+      color: var(--tx);
+      background: var(--hover-bg);
+    }
+
+    .nav-arrow:active:not(:disabled) {
+      transform: scale(0.92);
+    }
+
+    .slide-counter {
+      font-size: 12px;
+      color: var(--ft);
+      letter-spacing: 0.08em;
+      padding: 6px 12px;
+      border-radius: var(--r-p);
+      transition: color 0.2s ease, background 0.2s ease;
+    }
+
+    .slide-counter:hover {
+      color: var(--mu);
+      background: var(--hover-bg);
+    }
+
+    /* Тончайшая линия прогресса в самом низу экрана */
+    .edge-progress {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      background: transparent;
+      z-index: 15;
+      pointer-events: none;
+    }
+
+    .edge-progress i {
+      display: block;
+      height: 100%;
+      background: var(--ac);
+      opacity: 0.32;
+      transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* ——— ПЛЕЕР ОЗВУЧКИ С ПОВТОРОМ (СВОРАЧИВАЕМЫЙ) ——— */
+    #bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 30;
+      padding: 10px 14px calc(10px + var(--sa-b));
+      background: var(--bar-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid var(--ln);
+      transition: transform 0.28s ease, opacity 0.28s ease, background-color 0.3s ease;
+    }
+
+    /* Свёрнутый режим плеера — крошечная таблетка в углу, визуально не мешается */
+    #bar.collapsed {
+      left: auto;
+      right: 16px;
+      bottom: calc(16px + var(--sa-b));
+      width: auto;
+      padding: 4px 10px;
+      border: 1px solid var(--ln);
+      border-radius: var(--r-p);
+      background: var(--bar-collapsed-bg);
+      opacity: 0.55;
+    }
+
+    #bar.collapsed:hover {
+      opacity: 0.98;
+    }
+
+    .pl-mini {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--mu);
+    }
+
+    .pl-mini .mini-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--ac);
+      animation: pulseDot 1.8s ease-in-out infinite;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 0.35; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    .pl-r {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    .pl-n {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pl-n b {
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--mu);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .pl-n small {
+      font-size: 12px;
+      color: var(--ft);
+    }
+
+    .pl-b {
+      flex: none;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--ac);
+      color: var(--ac-fg);
+      display: grid;
+      place-items: center;
+    }
+
+    .pl-b svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    .ic-b {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: var(--r-s);
+      color: var(--mu);
+      flex: none;
+    }
+
+    .ic-b:hover {
+      color: var(--tx);
+      background: var(--hover-bg);
+    }
+
+    .ic-b svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .pl-x {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 12px;
+      max-width: var(--max-w);
+      margin: 10px auto 0;
+      padding-top: 8px;
+      border-top: 1px solid var(--ln);
+    }
+
+    .pl-x label {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--mu);
+    }
+
+    .pl-x label .mono {
+      color: var(--tx);
+    }
+
+    .pl-extra-row {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-top: 4px;
+    }
+
+    .chk {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--mu);
+      cursor: pointer;
+    }
+
+    /* ——— МОДАЛЬНЫЕ ЭКРАНЫ / ПАНЕЛИ (ВВОД ТЕКСТА, СОХРАНЁННЫЕ ТЕКСТЫ, ЗАКЛАДКИ, НАСТРОЙКИ) ——— */
+    #sheet {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      background: var(--sheet-backdrop);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      padding: 0 0 var(--sa-b);
+    }
+
+    .sh {
+      width: 100%;
+      max-width: 640px;
+      max-height: 90dvh;
+      overflow-y: auto;
+      background: var(--sf);
+      border: 1px solid var(--ln-strong);
+      border-bottom: 0;
+      border-radius: 18px 18px 0 0;
+      padding: 18px 20px calc(26px + var(--sa-b));
+      box-shadow: var(--sheet-shadow);
+      animation: sheetRise 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @keyframes sheetRise {
+      from { transform: translateY(24px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .shh {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .shh span {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--tx);
+    }
+
+    .sec {
+      margin-top: 18px;
+    }
+
+    .cap {
+      font-size: 12.5px;
+      color: var(--mu);
+      margin: 0 0 6px;
+      line-height: 1.4;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 9px 16px;
+      border-radius: var(--r-s);
+      background: var(--ac);
+      color: var(--ac-fg);
+      font-size: 14px;
+      font-weight: 500;
+      transition: opacity 0.2s ease, transform 0.15s ease;
+    }
+
+    .btn:active:not(:disabled) {
+      transform: scale(0.98);
+    }
+
+    .btn.gh {
+      background: transparent;
+      color: var(--tx);
+      border: 1px solid var(--ln-strong);
+      font-weight: 400;
+    }
+
+    .btn.gh:hover:not(:disabled) {
+      background: var(--hover-bg);
+    }
+
+    .btn.sm {
+      min-height: 34px;
+      padding: 6px 12px;
+      font-size: 13px;
+    }
+
+    .btn.wn {
+      color: var(--dg);
+      border-color: rgba(224, 122, 112, 0.3);
+    }
+
+    .seg-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .pill {
+      padding: 6px 12px;
+      border-radius: var(--r-p);
+      border: 1px solid var(--ln-strong);
+      font-size: 13px;
+      color: var(--mu);
+      transition: all 0.2s ease;
+    }
+
+    .pill.on {
+      background: var(--ac-soft);
+      border-color: var(--ac);
+      color: var(--tx);
+    }
+
+    /* Список сохранённых разбитых текстов и журнала закладок */
+    .hist-list {
+      list-style: none;
+      margin: 12px 0 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .hist-card {
+      background: var(--sf-2);
+      border: 1px solid var(--ln);
+      border-radius: var(--r-m);
+      padding: 12px 14px;
+      transition: border-color 0.2s ease;
+    }
+
+    .hist-card.active {
+      border-color: var(--ac);
+    }
+
+    .hist-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .hist-preview {
+      flex: 1;
+      min-width: 0;
+      text-align: left;
+      font-size: 15px;
+      line-height: 1.4;
+      color: var(--tx);
+      overflow-wrap: anywhere;
+    }
+
+    .hist-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--mu);
+    }
+
+    .hist-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    /* Баннер потока закладок */
+    .bm-stream-banner {
+      background: var(--ac-soft);
+      border: 1px solid var(--ac);
+      border-radius: var(--r-m);
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .bm-stream-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .bm-stream-info b {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--tx);
+    }
+
+    .bm-stream-info span {
+      font-size: 12px;
+      color: var(--mu);
+    }
+
+    /* Список кусочков внутри сохранённого текста или закладки */
+    .chunks-list {
+      list-style: none;
+      margin: 10px 0 0;
+      padding: 8px 0 0;
+      border-top: 1px solid var(--ln);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-height: 280px;
+      overflow-y: auto;
+    }
+
+    .chunk-item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      background: var(--hover-bg);
+      font-size: 13.5px;
+      line-height: 1.4;
+    }
+
+    .chunk-item:hover {
+      border-color: var(--ln-strong);
+    }
+
+    .chunk-text {
+      flex: 1;
+      text-align: left;
+      color: var(--tx);
+      cursor: pointer;
+    }
+
+    .chunk-btns {
+      display: flex;
+      gap: 4px;
+      flex: none;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    /* Тост-уведомление */
+    #ts {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: calc(24px + var(--sa-b));
+      z-index: 80;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: calc(100% - 32px);
+      padding: 9px 16px;
+      background: var(--sf-2);
+      border: 1px solid var(--ln-strong);
+      border-radius: var(--r-p);
+      box-shadow: var(--toast-shadow);
+      font-size: 13.5px;
+      color: var(--tx);
+    }
+
+    @media (max-width: 520px) {
+      :root {
+        --font-size: 25px;
+      }
+      #stage {
+        padding: calc(64px + var(--sa-t)) 20px calc(96px + var(--sa-b));
+      }
+      .pl-x, .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Едва заметная верхняя панель инструментов -->
+  <div class="top-rail" role="toolbar" aria-label="Инструменты">
+    <div class="rail-group">
+      <button class="ghost-btn" data-a="open-input" title="Разбить новый текст (N)" aria-label="Разбить новый текст">
+        <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+      </button>
+      <button class="ghost-btn" id="btn-rail-history" data-a="open-history" title="Сохранённые тексты (H)" aria-label="Сохранённые тексты">
+        <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+      </button>
+      <button class="ghost-btn" id="btn-rail-bookmarks" data-a="open-bookmarks" title="Журнал закладок (B)" aria-label="Журнал закладок">
+        <svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        <span class="rail-badge" id="bm-badge" hidden>0</span>
+      </button>
+    </div>
+    <div class="rail-group">
+      <button class="ghost-btn" id="btn-theme-toggle" data-a="toggle-theme" title="Переключить тему: Тёмная / Тёпло-молочная (T)" aria-label="Переключить тему">
+        <svg viewBox="0 0 24 24" id="icon-theme"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
+      <button class="ghost-btn" data-a="open-settings" title="Шрифт, тема, модель ИИ, API-ключ и JSON (S)" aria-label="Настройки">
+        <svg viewBox="0 0 24 24"><path d="M4 8h9M17 8h3M4 16h3M11 16h9M15 5.5v5M9 13.5v5"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Главное пространство слайд-шоу: только чистая мысль и воздух -->
+  <main id="stage" aria-live="polite"></main>
+
+  <!-- Тонкая полоска прогресса у края экрана -->
+  <div class="edge-progress"><i id="edge-bar" style="width: 0%"></i></div>
+
+  <!-- Сворачиваемый плеер озвучки с повтором -->
+  <div id="bar" hidden></div>
+
+  <!-- Модальный лист для ввода текста, библиотеки сохранённых кусков, журнала закладок и настроек -->
+  <div id="sheet" hidden data-a="close-bg"></div>
+
+  <!-- Уведомления -->
+  <div id="ts" hidden role="status" aria-live="polite"></div>
+
+  <!-- Скрытый input для импорта JSON -->
+  <input type="file" id="json-file" accept=".json,application/json,*/*" hidden>
+
+  <script>
+    (() => {
+      const STORAGE_KEY = "meaning_visualizer_v1";
+      const IDB_NAME = "meaning_visualizer_db";
+      const IDB_STORE = "app_state";
+      const IDB_BM_STORE = "bookmarks";
+      // Выбор повторов увеличен до 25 + бесконечность
+      const REPEATS = [
+        "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+        "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
+        "21", "22", "23", "24", "25", "∞"
+      ];
+      const TTS_GAP_MIN = 10;
+      const TTS_GAP_MAX = 600;
+
+      const AVAILABLE_FONTS = [
+        { id: "Onest", label: "Onest (Чистый гротеск)", css: '"Onest", -apple-system, BlinkMacSystemFont, sans-serif' },
+        { id: "Inter", label: "Inter (Нейтральный)", css: '"Inter", -apple-system, BlinkMacSystemFont, sans-serif' },
+        { id: "Nunito", label: "Nunito (Мягкий, из Обратного плана)", css: '"Nunito", system-ui, sans-serif' },
+        { id: "Spectral", label: "Spectral (Книжная антиква)", css: '"Spectral", Georgia, serif' },
+        { id: "Literata", label: "Literata (Для долгого чтения)", css: '"Literata", Georgia, serif' },
+        { id: "PT Serif", label: "PT Serif (Классический)", css: '"PT Serif", Georgia, serif' },
+        { id: "JetBrains Mono", label: "JetBrains Mono (Моноширинный)", css: '"JetBrains Mono", monospace' }
+      ];
+
+      const AVAILABLE_MODELS = [
+        "gemini-2.5-flash",
+        "gemini-2.5-pro",
+        "gemini-3.5-flash-lite",
+        "gemini-3.8-flash",
+        "gemini-2.0-flash"
+      ];
+
+      // Сокращения, после которых точка не означает конец предложения
+      const ABBR_REGEX = /(?:^|\s)(?:т\.д|т\.п|т\.е|т\.к|т\.н|др|пр|г|гг|в|вв|см|ср|рис|табл|стр|гл|п|пп|им|ул|пр-т|д|кв|корп|руб|коп|тыс|млн|млрд|сек|мин|ч|экз|проф|акад|доц|канд|док|госп|г-н|г-жа|пункт|шаг|часть|разд|рис|прим|mr|mrs|ms|dr|prof|vs|etc|e\.g|i\.e|inc|ltd|jr|sr|[А-ЯЁA-Z])\.$/i;
+
+      // Регулярные выражения для распознавания номеров и маркеров пунктов, чтобы они никогда не отрывались от текста пункта
+      const ITEM_MARKER_ONLY_REGEX = /^(?:(?:пункт|шаг|правило|часть|глава|раздел|мысль|принцип|№|#)\s*)?(?:\d+(?:\.\d+)*[.)]?|[IVXLCDM]+[.)]|[а-яёa-z][.)]|\(\d+\)|[-•*])$/i;
+      const TOKEN_NUMBER_DOT_REGEX = /^(?:№|#)?\d+(?:\.\d+)*[.)]$|^[IVXLCDM]+[.)]$|^[а-яёa-z][.)]$|^[-•*]$/i;
+      const TRAILING_ITEM_NUMBER_REGEX = /^(.*?\S[.!?:;…])\s+((?:(?:пункт|шаг|правило|часть|№|#)\s*)?(?:\d+(?:\.\d+)*[.)]|[IVXLCDM]+[.)]|[а-яёa-z]\)|[-•*]))$/i;
+
+      const DEFAULT_SAMPLE_TEXT = `1. Внимание — это главный ресурс, который работает глубже всего, когда перед глазами находится ровно одна законченная мысль. 2. Когда мы видим сразу целый абзац или страницу — мозг невольно пытается охватить всё целиком и теряет глубину восприятия. 3. Раздели любой сложный текст — на отдельные смысловые шаги и сохраняй важные мысли в журнал закладок.`;
+
+      // ——— БАЗА ДАННЫХ INDEXEDDB + LOCALSTORAGE ———
+      function openIdb() {
+        return new Promise((resolve, reject) => {
+          if (!("indexedDB" in globalThis)) return reject(new Error("No IndexedDB"));
+          const req = indexedDB.open(IDB_NAME, 2);
+          req.onupgradeneeded = () => {
+            const db = req.result;
+            if (!db.objectStoreNames.contains(IDB_STORE)) {
+              db.createObjectStore(IDB_STORE);
+            }
+            if (!db.objectStoreNames.contains(IDB_BM_STORE)) {
+              db.createObjectStore(IDB_BM_STORE, { keyPath: "id" });
+            }
+          };
+          req.onsuccess = () => resolve(req.result);
+          req.onerror = () => reject(req.error);
+        });
+      }
+
+      async function saveToDatabase(stateSnapshot) {
+        try {
+          const db = await openIdb();
+          const clone = JSON.parse(JSON.stringify(stateSnapshot));
+          await new Promise((resolve, reject) => {
+            const tx = db.transaction([IDB_STORE, IDB_BM_STORE], "readwrite");
+            tx.objectStore(IDB_STORE).put(clone, STORAGE_KEY);
+            const bmStore = tx.objectStore(IDB_BM_STORE);
+            bmStore.clear();
+            if (Array.isArray(clone.bookmarks_journal)) {
+              for (const bm of clone.bookmarks_journal) {
+                if (bm && bm.id) bmStore.put(bm);
+              }
+            }
+            tx.oncomplete = () => resolve();
+            tx.onerror = () => reject(tx.error);
+          });
+        } catch {}
+      }
+
+      async function loadFromDatabase() {
+        try {
+          const db = await openIdb();
+          return await new Promise((resolve, reject) => {
+            const tx = db.transaction([IDB_STORE, IDB_BM_STORE], "readonly");
+            const req = tx.objectStore(IDB_STORE).get(STORAGE_KEY);
+            const bmReq = tx.objectStore(IDB_BM_STORE).getAll();
+            let mainData = null;
+            let bmData = [];
+            req.onsuccess = () => { mainData = req.result || null; };
+            bmReq.onsuccess = () => { bmData = Array.isArray(bmReq.result) ? bmReq.result : []; };
+            tx.oncomplete = () => {
+              if (mainData && (!Array.isArray(mainData.bookmarks_journal) || !mainData.bookmarks_journal.length) && bmData.length) {
+                mainData.bookmarks_journal = bmData.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+              }
+              resolve(mainData);
+            };
+            tx.onerror = () => reject(tx.error);
+          });
+        } catch {
+          return null;
+        }
+      }
+
+      // ——— ИНИЦИАЛИЗАЦИЯ СОСТОЯНИЯ ———
+      function uid() {
+        return globalThis.crypto?.randomUUID?.() ?? `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 9)}`;
+      }
+
+      function freshState() {
+        const initialSegments = deconstruct_text_local(DEFAULT_SAMPLE_TEXT, "sentences");
+        const firstId = uid();
+        return {
+          v: 2,
+          activeSource: "history", // "history" | "bookmarks"
+          activeId: firstId,
+          activeBookmarkId: "__ALL__", // "__ALL__" (единый поток всех закладок) или id конкретной записи в журнале закладок
+          bookmarksStreamIndex: 0,
+          log_input_history: [
+            {
+              id: firstId,
+              createdAt: Date.now(),
+              source_text: DEFAULT_SAMPLE_TEXT,
+              deconstruct_text: initialSegments,
+              currentIndex: 0,
+              mode: "sentences"
+            }
+          ],
+          bookmarks_journal: [],
+          settings: {
+            theme: "dark", // "dark" | "light"
+            apiKey: "",
+            aiModel: "gemini-2.5-flash",
+            splitMode: "sentences", // "sentences" | "clauses" | "ai"
+            fontId: "Onest",
+            fontSize: 32,
+            lineHeight: 1.45,
+            maxWidth: 680,
+            ttsVoiceURI: "auto",
+            ttsCloud: true,
+            ttsProxyUrl: "",
+            ttsProxyKey: "",
+            ttsRate: 1.0,
+            ttsIntervalSec: 10,
+            ttsRepeat: "∞",
+            ttsAutoNext: false,
+            playerCollapsed: false,
+            playerExpanded: false
+          }
+        };
+      }
+
+      function normalizeLoadedState(parsed) {
+        const f = freshState();
+        if (!parsed || typeof parsed !== "object") return f;
+        const history = Array.isArray(parsed.log_input_history) && parsed.log_input_history.length
+          ? parsed.log_input_history
+          : f.log_input_history;
+        const bookmarks = Array.isArray(parsed.bookmarks_journal)
+          ? parsed.bookmarks_journal.filter(b => b && Array.isArray(b.deconstruct_text) && b.deconstruct_text.length)
+          : [];
+        return {
+          ...f,
+          ...parsed,
+          log_input_history: history,
+          bookmarks_journal: bookmarks,
+          activeSource: parsed.activeSource === "bookmarks" && bookmarks.length ? "bookmarks" : "history",
+          activeId: history.some(x => x.id === parsed.activeId) ? parsed.activeId : history[0].id,
+          activeBookmarkId: parsed.activeBookmarkId || "__ALL__",
+          bookmarksStreamIndex: Number(parsed.bookmarksStreamIndex) || 0,
+          settings: { ...f.settings, ...(parsed.settings || {}) }
+        };
+      }
+
+      function loadState() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return freshState();
+          return normalizeLoadedState(JSON.parse(raw));
+        } catch {
+          return freshState();
+        }
+      }
+
+      const state = loadState();
+
+      // Асинхронная синхронизация с базой данных IndexedDB при старте
+      loadFromDatabase().then(dbState => {
+        if (!dbState) {
+          saveToDatabase(state);
+          return;
+        }
+        const localRaw = localStorage.getItem(STORAGE_KEY);
+        if (!localRaw) {
+          Object.assign(state, normalizeLoadedState(dbState));
+          commit(false);
+          render();
+        }
+      });
+
+      const ui = {
+        sheet: null, // null | "input" | "history" | "bookmarks" | "settings" | "jump" | "split-current"
+        expandedHistId: null,
+        expandedBmId: null,
+        slideDir: 1,
+        aiBusy: false,
+        draftText: "",
+        bmDraftText: "",
+        bmInputOpen: false,
+        justCopiedKey: null
+      };
+
+      function commit(syncIdb = true) {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        } catch (err) {
+          console.warn("Storage error:", err);
+        }
+        if (syncIdb) {
+          saveToDatabase(state);
+        }
+        applyTypographyAndTheme();
+      }
+
+      function applyTypographyAndTheme() {
+        const s = state.settings;
+        const fontObj = AVAILABLE_FONTS.find(f => f.id === s.fontId) || AVAILABLE_FONTS[0];
+        const root = document.documentElement;
+        root.style.setProperty("--font-main", fontObj.css);
+        root.style.setProperty("--font-size", `${s.fontSize || 32}px`);
+        root.style.setProperty("--line-height", String(s.lineHeight || 1.45));
+        root.style.setProperty("--max-w", `${s.maxWidth || 680}px`);
+
+        const theme = s.theme === "light" ? "light" : "dark";
+        root.setAttribute("data-theme", theme);
+        const metaTheme = document.getElementById("meta-theme-color");
+        if (metaTheme) {
+          metaTheme.setAttribute("content", theme === "light" ? "#f7f2e7" : "#0b0b0e");
+        }
+        const iconTheme = document.getElementById("icon-theme");
+        if (iconTheme) {
+          iconTheme.innerHTML = theme === "light"
+            ? '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>'
+            : '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>';
+        }
+      }
+
+      // ——— УТИЛИТЫ И РЕНДЕР ЧИСТОГО MARKDOWN ———
+      const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      })[c]);
+
+      const pad = (n) => String(n).padStart(2, "0");
+      const mmss = (s) => `${pad(Math.floor(s / 60))}:${pad(s % 60)}`;
+      const fmtSec = (s) => {
+        s = Math.round(Number(s) || 0);
+        return s < 60 ? `${s} с` : `${Math.floor(s / 60)} мин${s % 60 ? ` ${s % 60} с` : ""}`;
+      };
+
+      // Рендер чистого текста с поддержкой инлайн-markdown
+      function renderPureMarkdown(raw) {
+        let txt = esc(String(raw ?? "").trim());
+        txt = txt.replace(/`([^`]+)`/g, "<code>$1</code>");
+        txt = txt.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+        txt = txt.replace(/__([^_]+)__/g, "<strong>$1</strong>");
+        txt = txt.replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, "$1<em>$2</em>");
+        txt = txt.replace(/(^|[^_])_([^_\n]+)_(?!_)/g, "$1<em>$2</em>");
+        txt = txt.replace(/==([^=]+)==/g, "<mark>$1</mark>");
+        txt = txt.replace(/~~([^~]+)~~/g, "<del>$1</del>");
+        txt = txt.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+
+        const paragraphs = txt.split(/\n{2,}/).map(p => `<p>${p.replace(/\n/g, "<br>")}</p>`);
+        return paragraphs.join("");
+      }
+
+      // Чистый текст для озвучки (без markdown-символов)
+      function stripMarkdownForSpeech(raw) {
+        return String(raw ?? "")
+          .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, "$1")
+          .replace(/[*_~`=<>]+/g, "")
+          .trim();
+      }
+
+      // ——— ПРАВИЛА НЕДЕЛИМОСТИ ЧИСЕЛ ПУНКТОВ И СЛОВ ДО «—» ———
+      // Гарантирует, что:
+      // 1) Числа у пунктов (1., 2., 1), I., № 1 и т.д.) никогда не оказываются оторванными от текста пункта на отдельном слайде.
+      // 2) Слова до «—» никогда не отделяются от тире «—» и следующей за ним части мысли.
+      function enforceNoSplitRules(rawSegments) {
+        if (!Array.isArray(rawSegments) || !rawSegments.length) return [];
+        const list = rawSegments.map(s => String(s ?? "").trim()).filter(Boolean);
+
+        // Шаг 1: Если в конце сегмента затесался номер следующего пункта (например, "...мысль. 2."), переносим "2." в начало следующего сегмента
+        for (let i = 0; i < list.length - 1; i++) {
+          const m = list[i].match(TRAILING_ITEM_NUMBER_REGEX);
+          if (m && m[1] && m[2]) {
+            list[i] = m[1].trim();
+            list[i + 1] = `${m[2].trim()} ${list[i + 1]}`.trim();
+          }
+        }
+
+        // Шаг 2: Склеиваем одиночные номера пунктов и части до/после «—»
+        const result = [];
+        for (let i = 0; i < list.length; i++) {
+          let cur = list[i];
+          if (!cur) continue;
+
+          // Если текущий сегмент — только номер пункта ("1.", "2)", "I.", "Пункт 1."), приклеиваем его к следующему сегменту
+          if (ITEM_MARKER_ONLY_REGEX.test(cur) && i < list.length - 1) {
+            list[i + 1] = `${cur} ${list[i + 1]}`.trim();
+            continue;
+          }
+
+          // Если текущий сегмент заканчивается на тире («—», «–» или « -»), приклеиваем к нему следующий сегмент
+          if (/(?:[—–]|\s-)$/.test(cur) && i < list.length - 1) {
+            list[i + 1] = `${cur} ${list[i + 1]}`.trim();
+            continue;
+          }
+
+          // Если текущий сегмент начинается с тире («—», «–» или «- »), значит слова до «—» остались в предыдущем сегменте — объединяем их!
+          if (result.length > 0 && /^(?:[—–]|-\s)/.test(cur)) {
+            result[result.length - 1] = `${result[result.length - 1]} ${cur}`.trim();
+            continue;
+          }
+
+          result.push(cur);
+        }
+
+        // Повторный проход: если внутри списка остались сегменты, где слова до «—» оторвались от тире
+        const finalResult = [];
+        for (let i = 0; i < result.length; i++) {
+          const seg = result[i];
+          if (finalResult.length > 0 && /^(?:[—–]|-\s)/.test(seg)) {
+            finalResult[finalResult.length - 1] = `${finalResult[finalResult.length - 1]} ${seg}`.trim();
+          } else if (/(?:[—–]|\s-)$/.test(seg) && i < result.length - 1) {
+            result[i + 1] = `${seg} ${result[i + 1]}`.trim();
+          } else {
+            finalResult.push(seg);
+          }
+        }
+
+        return finalResult;
+      }
+
+      // ——— ДЕКОНСТРУКЦИЯ ТЕКСТА (deconstruct_text) СО СТРОГИМ СОХРАНЕНИЕМ СЛОВО В СЛОВО ———
+      function deconstruct_text_local(source_text, mode = "sentences") {
+        const text = String(source_text ?? "").trim();
+        if (!text) return [];
+
+        // Сначала разбиваем на строки и склеиваем строки, где номер пункта или тире «—» перенесены на новую строку
+        const rawLines = text.split(/\r?\n+/).map(l => l.trim()).filter(Boolean);
+        const lines = [];
+        for (let i = 0; i < rawLines.length; i++) {
+          const line = rawLines[i];
+          if (ITEM_MARKER_ONLY_REGEX.test(line) && i < rawLines.length - 1) {
+            rawLines[i + 1] = `${line} ${rawLines[i + 1]}`.trim();
+            continue;
+          }
+          if (lines.length > 0 && (/^(?:[—–]|-\s)/.test(line) || /[—–-]$/.test(lines[lines.length - 1]))) {
+            lines[lines.length - 1] = `${lines[lines.length - 1]} ${line}`.trim();
+            continue;
+          }
+          lines.push(line);
+        }
+
+        const sentences = [];
+
+        for (const line of lines) {
+          let buf = "";
+          const tokens = line.split(/(\s+)/);
+          for (let i = 0; i < tokens.length; i++) {
+            const tok = tokens[i];
+            buf += tok;
+
+            if (/[.!?…]+["»”']*$/.test(tok)) {
+              const trimmed = buf.trim();
+
+              // 1. Не делим, если буфер сейчас состоит только из номера пункта ("1.", "1.1.", "I.", "Пункт 1.")
+              if (ITEM_MARKER_ONLY_REGEX.test(trimmed)) {
+                continue;
+              }
+
+              // 2. Не делим, если сам токен — это номер пункта ("1.", "2.") после двоеточия или в начале списка
+              if (TOKEN_NUMBER_DOT_REGEX.test(tok)) {
+                // Проверяем: если перед этим номером уже было законченное предложение, отделим предыдущее предложение ДО номера пункта, а сам номер оставим в буфере для следующего слайда!
+                const withoutNum = trimmed.slice(0, trimmed.length - tok.length).trim();
+                if (withoutNum && /[.!?…]+["»”']*$/.test(withoutNum)) {
+                  sentences.push(withoutNum);
+                  buf = tok;
+                }
+                continue;
+              }
+
+              // 3. Не делим после сокращений
+              if (ABBR_REGEX.test(trimmed)) {
+                continue;
+              }
+
+              // 4. Смотрим следующий непробельный токен: если он начинается с «—» или «–», не разрываем слова до «—» и тире!
+              let nextNonSpace = "";
+              for (let j = i + 1; j < tokens.length; j++) {
+                if (tokens[j].trim()) {
+                  nextNonSpace = tokens[j].trim();
+                  break;
+                }
+              }
+              if (/^(?:[—–]|-\s)/.test(nextNonSpace)) {
+                continue;
+              }
+
+              sentences.push(trimmed);
+              buf = "";
+            }
+          }
+          if (buf.trim()) sentences.push(buf.trim());
+        }
+
+        const cleanSentences = enforceNoSplitRules(sentences);
+
+        if (mode !== "clauses") {
+          return cleanSentences;
+        }
+
+        // Режим микро-мыслей ("clauses"):
+        // Делит длинные предложения по точкам с запятой и союзам после запятой,
+        // НО НИКОГДА не делит слова до «—» от самого «—» и его пояснения!
+        const micro = [];
+        for (const s of cleanSentences) {
+          if (s.length <= 75) {
+            micro.push(s);
+            continue;
+          }
+
+          // Делим только по точке с запятой или перед союзами после запятой (без деления по «—»)
+          const rawParts = s.split(/(?<=;)\s+|(?<=,)\s+(?=(?:но|а|однако|чтобы|потому что|так как|поэтому|хотя|если|когда|где|который|которая|которые|причём|притом)\b)/i)
+            .map(p => p.trim())
+            .filter(Boolean);
+
+          // Если внутри предложения есть «—», гарантируем, что часть со словами до «—» не разорвана с «—»
+          const mergedParts = [];
+          for (let i = 0; i < rawParts.length; i++) {
+            const part = rawParts[i];
+            if (
+              mergedParts.length > 0 &&
+              (/^(?:[—–]|-\s)/.test(part) || /[—–-]$/.test(mergedParts[mergedParts.length - 1]))
+            ) {
+              mergedParts[mergedParts.length - 1] = `${mergedParts[mergedParts.length - 1]} ${part}`.trim();
+            } else {
+              mergedParts.push(part);
+            }
+          }
+
+          micro.push(...enforceNoSplitRules(mergedParts));
+        }
+
+        return enforceNoSplitRules(micro);
+      }
+
+      // Верификатор пословной точности: гарантирует, что ИИ не изменил, не добавил и не удалил ни одного слова из source_text
+      function verifyWordForWord(source_text, candidateSegments) {
+        if (!Array.isArray(candidateSegments) || !candidateSegments.length) return null;
+        const norm = (str) => String(str).replace(/\s+/g, " ").trim();
+        const origNorm = norm(source_text);
+        const joinedNorm = norm(candidateSegments.join(" "));
+        if (origNorm === joinedNorm) {
+          return enforceNoSplitRules(candidateSegments.map(s => s.trim()).filter(Boolean));
+        }
+
+        const aligned = [];
+        let cursor = 0;
+        const src = source_text.trim();
+
+        for (let i = 0; i < candidateSegments.length; i++) {
+          const seg = candidateSegments[i].trim();
+          if (!seg) continue;
+          if (i === candidateSegments.length - 1) {
+            const rest = src.slice(cursor).trim();
+            if (rest) aligned.push(rest);
+            cursor = src.length;
+            break;
+          }
+          const words = seg.split(/\s+/);
+          const lastWord = words[words.length - 1];
+          const approxLen = seg.length;
+          const searchStart = Math.max(cursor, cursor + approxLen - Math.max(20, lastWord.length * 2));
+          const idx = src.indexOf(lastWord, searchStart);
+          if (idx !== -1 && idx - cursor <= approxLen + 60) {
+            const cutEnd = idx + lastWord.length;
+            const exactPiece = src.slice(cursor, cutEnd).trim();
+            if (exactPiece) aligned.push(exactPiece);
+            cursor = cutEnd;
+            while (cursor < src.length && /\s/.test(src[cursor])) cursor++;
+          } else {
+            return null;
+          }
+        }
+        const tail = src.slice(cursor).trim();
+        if (tail) aligned.push(tail);
+        return aligned.length ? enforceNoSplitRules(aligned) : null;
+      }
+
+      async function deconstruct_text(source_text, mode = state.settings.splitMode) {
+        const cleanSource = String(source_text ?? "").trim();
+        if (!cleanSource) return [];
+
+        if (mode === "ai" && state.settings.apiKey.trim()) {
+          try {
+            const key = state.settings.apiKey.trim();
+            const model = state.settings.aiModel.trim() || "gemini-2.5-flash";
+            const systemPrompt = [
+              "Analyze the source_text and split it into a list of individual text segments for the slideshow.",
+              "It is critical that the text remains exactly word-for-word as provided by the user without editing or paraphrasing.",
+              "Insert the exact delimiter |||SPLIT||| between independent thoughts.",
+              "NEVER split item numbers (e.g. '1.', '2.', '1)', 'I.') from the text of the item that follows them.",
+              "NEVER split the words before a dash ('—' or '–') from the dash and the explanation after the dash; keep the subject before '—' and the clause after '—' on the same slide.",
+              "Do NOT add any titles, headings, numbering, bullets, introductory words, or explanations.",
+              "Output ONLY the original text with |||SPLIT||| inserted at thought boundaries."
+            ].join(" ");
+
+            const res = await fetch(
+              `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`,
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "x-goog-api-key": key },
+                body: JSON.stringify({
+                  contents: [{ parts: [{ text: cleanSource }] }],
+                  systemInstruction: { parts: [{ text: systemPrompt }] },
+                  generationConfig: { temperature: 0.1 }
+                })
+              }
+            );
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const data = await res.json();
+            const rawOut = data?.candidates?.[0]?.content?.parts?.map(p => p.text || "").join("").trim();
+            if (rawOut) {
+              const rawSegments = rawOut.split(/\s*\|\|\|SPLIT\|\|\|\s*/).map(s => s.trim()).filter(Boolean);
+              const verified = verifyWordForWord(cleanSource, rawSegments);
+              if (verified && verified.length) return verified;
+            }
+          } catch (err) {
+            toast(`ИИ недоступен (${err.message || "ошибка"}), использовано точное локальное разбиение`);
+          }
+        }
+
+        return deconstruct_text_local(cleanSource, mode === "clauses" ? "clauses" : "sentences");
+      }
+
+      // ——— УПРАВЛЕНИЕ АКТИВНЫМ ИСТОЧНИКОМ СЛАЙДОВ (ТЕКСТЫ ИЛИ ЖУРНАЛ ЗАКЛАДОК) ———
+      // Собирает плоский поток всех мыслей из журнала закладок (для режима единого слайд-шоу закладок)
+      function getAllBookmarkedSegmentsMap() {
+        const map = [];
+        for (const bm of state.bookmarks_journal) {
+          if (!bm || !Array.isArray(bm.deconstruct_text)) continue;
+          for (let cIdx = 0; cIdx < bm.deconstruct_text.length; cIdx++) {
+            map.push({
+              bmId: bm.id,
+              chunkIdx: cIdx,
+              text: bm.deconstruct_text[cIdx]
+            });
+          }
+        }
+        return map;
+      }
+
+      // Возвращает виртуальный или реальный документ для главного экрана слайд-шоу (с единым интерфейсом)
+      function currentDoc() {
+        if (state.activeSource === "bookmarks" && state.bookmarks_journal.length > 0) {
+          if (state.activeBookmarkId && state.activeBookmarkId !== "__ALL__") {
+            const bmDoc = state.bookmarks_journal.find(x => x.id === state.activeBookmarkId);
+            if (bmDoc && bmDoc.deconstruct_text.length > 0) {
+              return bmDoc;
+            }
+          }
+          // Режим "__ALL__": единый поток всех закладок на слайдах
+          const flat = getAllBookmarkedSegmentsMap();
+          if (flat.length > 0) {
+            const idx = Math.min(Math.max(0, state.bookmarksStreamIndex || 0), flat.length - 1);
+            state.bookmarksStreamIndex = idx;
+            return {
+              id: "__BM_STREAM__",
+              isVirtualStream: true,
+              deconstruct_text: flat.map(x => x.text),
+              flatMap: flat,
+              get currentIndex() {
+                return state.bookmarksStreamIndex;
+              },
+              set currentIndex(v) {
+                state.bookmarksStreamIndex = v;
+              }
+            };
+          }
+        }
+
+        // Если закладки пусты, возвращаемся к обычным текстам
+        if (state.activeSource === "bookmarks") {
+          state.activeSource = "history";
+        }
+
+        let doc = state.log_input_history.find(x => x.id === state.activeId);
+        if (!doc && state.log_input_history.length) {
+          doc = state.log_input_history[0];
+          state.activeId = doc.id;
+        }
+        return doc || null;
+      }
+
+      function currentSegmentText() {
+        const doc = currentDoc();
+        if (!doc || !doc.deconstruct_text.length) return "";
+        const idx = Math.min(Math.max(0, doc.currentIndex || 0), doc.deconstruct_text.length - 1);
+        return doc.deconstruct_text[idx] || "";
+      }
+
+      // Проверка, находится ли мысль в журнале закладок
+      function isThoughtBookmarked(thoughtText) {
+        const norm = String(thoughtText ?? "").trim();
+        if (!norm) return false;
+        return state.bookmarks_journal.some(bm =>
+          Array.isArray(bm.deconstruct_text) && bm.deconstruct_text.some(seg => seg.trim() === norm)
+        );
+      }
+
+      // Добавление или удаление текущей мысли из журнала закладок
+      function toggleBookmarkForThought(thoughtText) {
+        const clean = String(thoughtText ?? "").trim();
+        if (!clean) return;
+
+        // Проверяем, есть ли уже такая мысль в журнале закладок
+        for (let i = 0; i < state.bookmarks_journal.length; i++) {
+          const bm = state.bookmarks_journal[i];
+          const segIdx = bm.deconstruct_text.findIndex(seg => seg.trim() === clean);
+          if (segIdx !== -1) {
+            // Если в записи только 1 мысль — удаляем саму запись закладки, иначе удаляем этот кусочек
+            if (bm.deconstruct_text.length <= 1) {
+              state.bookmarks_journal.splice(i, 1);
+            } else {
+              bm.deconstruct_text.splice(segIdx, 1);
+              bm.source_text = bm.deconstruct_text.join(" ");
+              if (bm.currentIndex >= bm.deconstruct_text.length) {
+                bm.currentIndex = Math.max(0, bm.deconstruct_text.length - 1);
+              }
+            }
+            commit();
+            render();
+            toast("Удалено из журнала закладок");
+            return;
+          }
+        }
+
+        // Добавляем новую запись в журнал закладок (обладает тем же функционалом, что и разделённый текст)
+        const newBm = {
+          id: uid(),
+          createdAt: Date.now(),
+          source_text: clean,
+          deconstruct_text: [clean],
+          currentIndex: 0,
+          mode: "sentences"
+        };
+        state.bookmarks_journal.unshift(newBm);
+        commit();
+        render();
+        toast("Сохранено в журнал закладок");
+      }
+
+      // Копирование текста в буфер обмена
+      async function copyTextToClipboard(text, segKey = null) {
+        const clean = String(text ?? "").trim();
+        if (!clean) return;
+        try {
+          await navigator.clipboard.writeText(clean);
+        } catch {
+          const ta = document.createElement("textarea");
+          ta.value = clean;
+          ta.style.position = "fixed";
+          ta.style.opacity = "0";
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand("copy"); } catch {}
+          ta.remove();
+        }
+        if (segKey) {
+          ui.justCopiedKey = segKey;
+          render();
+          setTimeout(() => {
+            if (ui.justCopiedKey === segKey) {
+              ui.justCopiedKey = null;
+              render();
+            }
+          }, 1400);
+        }
+        toast("Мысль скопирована в буфер обмена");
+      }
+
+      // ——— ОЗВУЧКА С ПОВТОРОМ И ПЛЕЕРОМ ———
+      let ttsRun = null;
+      let ttsSpeakTimer = 0;
+      const ttsKeep = { audio: null, worker: null, url: null, wav: null };
+
+      // Определяем iOS (iPhone / iPad / iPod) для локального HTML
+      const isIOSDevice = () => {
+        const ua = navigator.userAgent || "";
+        return /iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+      };
+
+      const ttsGapSec = () => Math.min(
+        TTS_GAP_MAX,
+        Math.max(TTS_GAP_MIN, Math.round(Number(state.settings.ttsIntervalSec) || TTS_GAP_MIN))
+      );
+
+      // Кэширование и подгрузка голосов для Edge (Microsoft Dmitry Online Natural) и iOS
+      let cachedVoices = [];
+
+      function getAvailableVoices() {
+        try {
+          const live = window.speechSynthesis?.getVoices?.() || [];
+          if (live.length) {
+            cachedVoices = live;
+            return live;
+          }
+        } catch {}
+        return Array.isArray(cachedVoices) ? cachedVoices : [];
+      }
+
+      function refreshVoices() {
+        return getAvailableVoices();
+      }
+
+      // Поиск именно голоса Microsoft Dmitry Online (Natural) / Дмитрий
+      function findDmitryVoice(voices) {
+        const list = Array.isArray(voices) ? voices : getAvailableVoices();
+        if (!list.length) return null;
+        const natural = list.find(v =>
+          (/dmitry|дмитрий/i.test(v.name) || /dmitry|дмитрий/i.test(v.voiceURI)) &&
+          /natural|online/i.test(`${v.name} ${v.voiceURI}`)
+        );
+        if (natural) return natural;
+        return list.find(v =>
+          /dmitry|дмитрий/i.test(v.name) || /dmitry|дмитрий/i.test(v.voiceURI)
+        ) || null;
+      }
+
+      // Ожидание подгрузки именно облачных голосов Edge (Microsoft Dmitry Online (Natural)),
+      // не прерываясь раньше времени на первой фазе загрузки офлайн-голосов (Irina / Pavel)
+      function ensureVoicesLoaded(timeoutMs = 1600) {
+        return new Promise((resolve) => {
+          const initial = getAvailableVoices();
+          if (findDmitryVoice(initial) || (isIOSDevice() && initial.length > 0)) {
+            return resolve(initial);
+          }
+          if (!("speechSynthesis" in window)) return resolve([]);
+
+          let done = false;
+          const finish = () => {
+            if (done) return;
+            done = true;
+            clearTimeout(timer);
+            clearInterval(poll);
+            try { window.speechSynthesis.removeEventListener("voiceschanged", onVc); } catch {}
+            resolve(getAvailableVoices());
+          };
+
+          const checkReady = () => {
+            const vList = getAvailableVoices();
+            if (findDmitryVoice(vList) || (isIOSDevice() && vList.length > 0)) {
+              finish();
+            }
+          };
+
+          const onVc = () => checkReady();
+          const timer = setTimeout(finish, timeoutMs);
+          const poll = setInterval(checkReady, 90);
+
+          try {
+            window.speechSynthesis.addEventListener("voiceschanged", onVc);
+          } catch {}
+        });
+      }
+
+      // Фоновая инициализация голосов при старте страницы, чтобы голос Дмитрий в Edge появлялся сразу
+      function initVoicesWarmup() {
+        if (!("speechSynthesis" in window)) return;
+        let lastCount = 0;
+        let hadDmitry = false;
+
+        const syncUiIfChanged = () => {
+          const list = getAvailableVoices();
+          const hasDm = !!findDmitryVoice(list);
+          if (list.length !== lastCount || hasDm !== hadDmitry) {
+            lastCount = list.length;
+            hadDmitry = hasDm;
+            if (ui.sheet === "settings") renderSheet();
+            if (ttsRun) {
+              barEl.dataset.sig = "";
+              renderBar();
+            }
+          }
+        };
+
+        syncUiIfChanged();
+        try {
+          window.speechSynthesis.addEventListener("voiceschanged", syncUiIfChanged);
+        } catch {}
+
+        let tries = 0;
+        const warmTimer = setInterval(() => {
+          tries++;
+          syncUiIfChanged();
+          if (hadDmitry || tries >= 25) {
+            clearInterval(warmTimer);
+          }
+        }, 250);
+      }
+
+      initVoicesWarmup();
+
+      // Умный выбор голоса:
+      // 1. Выбранный пользователем голос (включая явный выбор "dmitry")
+      // 2. Microsoft Dmitry Online (Natural) / Дмитрий (в браузере Edge)
+      // 3. Другие русские нейросетевые голоса Microsoft (Svetlana, Dariya)
+      // 4. Локальные голоса iOS (Yuri/Юрий, Milena/Милена, Pavel/Павел, Katya/Катя)
+      // 5. Любой доступный русский голос
+      function pickBestVoice(hasCyr = true) {
+        const voices = getAvailableVoices();
+        if (!voices.length) return null;
+
+        const prefURI = state.settings.ttsVoiceURI || "auto";
+        if (prefURI === "dmitry") {
+          const dm = findDmitryVoice(voices);
+          if (dm) return dm;
+        } else if (prefURI !== "auto") {
+          const exact = voices.find(v => v.voiceURI === prefURI || v.name === prefURI);
+          if (exact) return exact;
+          if (/dmitry|дмитрий/i.test(prefURI)) {
+            const dm = findDmitryVoice(voices);
+            if (dm) return dm;
+          }
+        }
+
+        if (hasCyr) {
+          // Приоритет 1: Microsoft Dmitry Online (Natural) в Edge
+          const dmitry = findDmitryVoice(voices);
+          if (dmitry) return dmitry;
+
+          const ruVoices = voices.filter(v =>
+            (v.lang && /^ru(?:\b|[-_])/i.test(v.lang)) ||
+            /russian|русский|dmitry|дмитрий|svetlana|светлана|dariya|дарья|irina|ирина|pavel|павел|yuri|юрий|milena|милена|katya|катя/i.test(v.name)
+          );
+
+          // Приоритет 2: Другие Online Natural голоса Edge (Svetlana, Dariya)
+          const edgeNatural = ruVoices.find(v => /microsoft/i.test(v.name) && /natural|online/i.test(v.name));
+          if (edgeNatural) return edgeNatural;
+
+          // Приоритет 3: Локальные голоса iOS (Yuri, Milena, Pavel, Katya) и локальные голоса
+          const iosOrLocal = ruVoices.find(v => /yuri|юрий|milena|милена|pavel|павел|katya|катя|irina|ирина|enhanced|premium/i.test(v.name));
+          if (iosOrLocal) return iosOrLocal;
+
+          return ruVoices.find(v => v.default) || ruVoices[0] || null;
+        }
+
+        const enVoices = voices.filter(v => v.lang && /^en(?:\b|[-_])/i.test(v.lang));
+        return enVoices.find(v => /natural|online|enhanced|premium/i.test(v.name)) || enVoices.find(v => v.default) || enVoices[0] || null;
+      }
+
+      // ——— ГОЛОСА (ru / en / es / fr) И ОБЛАЧНЫЙ EDGE TTS ———
+      // Поток MP3 запрашивается по WebSocket у readaloud-сервиса Microsoft Edge либо через ваш прокси.
+      // Константы ниже — неофициальный протокол: если Microsoft его сменит, правятся только они.
+      const EDGE_CFG = {
+        token: "6A5AA1D4EAFF4E9FB37E23D68491D6F4",
+        ver: "1-130.0.2849.68",
+        ws: "wss://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1",
+        timeout: 12000,
+        downMs: 300000
+      };
+      const EDGE_VOICES = [
+        ["ru", "ru-RU-DmitryNeural", "Дмитрий", "муж."],
+        ["ru", "ru-RU-SvetlanaNeural", "Светлана", "жен."],
+        ["en", "en-US-GuyNeural", "Guy (US)", "муж."],
+        ["en", "en-US-AriaNeural", "Aria (US)", "жен."],
+        ["en", "en-US-JennyNeural", "Jenny (US)", "жен."],
+        ["en", "en-GB-RyanNeural", "Ryan (UK)", "муж."],
+        ["en", "en-GB-SoniaNeural", "Sonia (UK)", "жен."],
+        ["es", "es-ES-AlvaroNeural", "Álvaro (ES)", "муж."],
+        ["es", "es-ES-ElviraNeural", "Elvira (ES)", "жен."],
+        ["es", "es-MX-JorgeNeural", "Jorge (MX)", "муж."],
+        ["es", "es-MX-DaliaNeural", "Dalia (MX)", "жен."],
+        ["fr", "fr-FR-HenriNeural", "Henri (FR)", "муж."],
+        ["fr", "fr-FR-DeniseNeural", "Denise (FR)", "жен."],
+        ["fr", "fr-CA-JeanNeural", "Jean (CA)", "муж."],
+        ["fr", "fr-CA-SylvieNeural", "Sylvie (CA)", "жен."]
+      ];
+      const EDGE_DEFAULT = { ru: "ru-RU-DmitryNeural", en: "en-US-GuyNeural", es: "es-ES-AlvaroNeural", fr: "fr-FR-HenriNeural" };
+      const LANG_BCP = { ru: "ru-RU", en: "en-US", es: "es-ES", fr: "fr-FR" };
+      const LANG_NAME = { ru: "Русские", en: "English", es: "Español", fr: "Français" };
+      const cloud = { tok: null, ws: null, ctl: null, el: null, down: 0, told: false, cache: new Map() };
+
+      // Определение языка текста: кириллица → ru, иначе счёт служебных слов и диакритики
+      function detectLang(t) {
+        t = String(t || "").toLowerCase();
+        const cyr = (t.match(/[а-яё]/g) || []).length;
+        const lat = (t.match(/[a-zà-ÿñ]/g) || []).length;
+        if (!lat || cyr >= lat) return "ru";
+        const W = {
+          en: /\b(the|and|is|are|of|to|in|that|it|you|for|with|this|not)\b/g,
+          es: /\b(el|la|los|las|de|que|y|en|un|una|por|con|para|es|se|no|lo|como)\b/g,
+          fr: /\b(le|la|les|des|du|et|est|une|un|que|pas|pour|dans|qui|sur|ce|il|je|vous|nous)\b/g
+        };
+        const sc = {};
+        for (const k in W) sc[k] = (t.match(W[k]) || []).length;
+        sc.es += (t.match(/[ñ¿¡]/g) || []).length * 3 + (t.match(/[áíóú]/g) || []).length;
+        sc.fr += (t.match(/[àâçèêëîïôùûœ]/g) || []).length * 2;
+        return Object.keys(sc).sort((a, b) => sc[b] - sc[a])[0];
+      }
+
+      const langOf = (v) => {
+        const m = String(v.lang || "").toLowerCase().replace("_", "-").slice(0, 2);
+        return LANG_BCP[m] ? m : "";
+      };
+      const sysScore = (v) => {
+        const n = `${v.name} ${v.voiceURI}`;
+        return (/premium|премиум/i.test(n) ? 5 : /enhanced|улучшен/i.test(n) ? 4 : /siri/i.test(n) ? 3 : 0)
+          + (/dmitry|дмитрий/i.test(n) ? 6 : /natural|online/i.test(n) ? 3 : 0)
+          + (/yuri|юрий|milena|милена|katya|катя|thomas|amélie|amelie|monica|mónica|paulina|samantha|daniel/i.test(n) ? 2 : 0);
+      };
+      // Лучший системный голос (iOS / Edge / ОС) нужного языка; выбранный пользователем — в приоритете
+      function pickSystemVoice(lang) {
+        const vs = getAvailableVoices().filter(v => langOf(v) === lang);
+        if (!vs.length) return null;
+        const pref = state.settings.ttsVoiceURI;
+        return vs.find(v => v.voiceURI === pref || v.name === pref) || vs.sort((a, b) => sysScore(b) - sysScore(a))[0];
+      }
+
+      function getActiveVoiceLabel() {
+        const pref = state.settings.ttsVoiceURI || "auto";
+        const edgeName = pref === "dmitry" ? EDGE_DEFAULT.ru : pref.startsWith("edge:") ? pref.slice(5) : "";
+        if (state.settings.ttsCloud !== false && (pref === "auto" || edgeName)) {
+          const e = EDGE_VOICES.find(x => x[1] === (edgeName || EDGE_DEFAULT.ru));
+          return `☁ Edge · ${e ? e[2] : "Дмитрий"}${pref === "auto" ? " (авто)" : ""}`;
+        }
+        const v = getAvailableVoices().find(x => x.voiceURI === pref || x.name === pref) || pickSystemVoice("ru");
+        return v ? v.name.replace(/^Microsoft\s+/i, "MS ").replace(/\s*-\s*Russian\s*\(Russia\)/i, "") : "системный голос";
+      }
+
+      function buildVoiceOptionsHtml() {
+        const p = state.settings.ttsVoiceURI || "auto";
+        const cur = p === "dmitry" ? "edge:" + EDGE_DEFAULT.ru : p;
+        const opt = (val, label) => `<option value="${esc(val)}"${cur === val ? " selected" : ""}>${esc(label)}</option>`;
+        const out = [opt("auto", "Авто — Edge Дмитрий / голос по языку текста")];
+        const all = getAvailableVoices();
+        for (const l of ["ru", "en", "es", "fr"]) {
+          out.push(`<optgroup label="${LANG_NAME[l]} · ☁ Microsoft Edge (поток)">${
+            EDGE_VOICES.filter(x => x[0] === l).map(x => opt("edge:" + x[1], `${x[2]} · ${x[3]} · Neural`)).join("")
+          }</optgroup>`);
+          const seen = new Set();
+          const sys = all
+            .filter(v => langOf(v) === l && !seen.has(v.voiceURI || v.name) && seen.add(v.voiceURI || v.name))
+            .sort((a, b) => sysScore(b) - sysScore(a))
+            .map(v => opt(v.voiceURI || v.name, `${v.name} (${v.lang})`)).join("");
+          if (sys) out.push(`<optgroup label="${LANG_NAME[l]} · 📱 системные${isIOSDevice() ? " (iOS)" : ""}">${sys}</optgroup>`);
+        }
+        return out.join("");
+      }
+
+      // ——— SHA-256 (запасной вариант там, где нет crypto.subtle, например file:// в Safari) ———
+      function sha256hex(str) {
+        const K = [], H = [];
+        for (let c = 2, n = 0; n < 64; c++) {
+          let p = 1;
+          for (let d = 2; d * d <= c; d++) if (c % d === 0) { p = 0; break; }
+          if (p) { if (n < 8) H[n] = (Math.pow(c, 0.5) % 1) * 4294967296 | 0; K[n++] = (Math.pow(c, 1 / 3) % 1) * 4294967296 | 0; }
+        }
+        const m = [...new TextEncoder().encode(str)], bits = m.length * 8;
+        m.push(128);
+        while (m.length % 64 !== 56) m.push(0);
+        for (let i = 7; i >= 0; i--) m.push(i > 3 ? 0 : (bits >>> (i * 8)) & 255);
+        let h = H.slice();
+        const w = new Array(64);
+        for (let o = 0; o < m.length; o += 64) {
+          for (let i = 0; i < 16; i++) w[i] = (m[o + 4 * i] << 24) | (m[o + 4 * i + 1] << 16) | (m[o + 4 * i + 2] << 8) | m[o + 4 * i + 3];
+          for (let i = 16; i < 64; i++) {
+            const a = w[i - 15], b = w[i - 2];
+            w[i] = (w[i - 16] + (((a >>> 7) | (a << 25)) ^ ((a >>> 18) | (a << 14)) ^ (a >>> 3)) + w[i - 7] + (((b >>> 17) | (b << 15)) ^ ((b >>> 19) | (b << 13)) ^ (b >>> 10))) | 0;
+          }
+          let [a, b, c, d, e, f, g, x] = h;
+          for (let i = 0; i < 64; i++) {
+            const t1 = (x + (((e >>> 6) | (e << 26)) ^ ((e >>> 11) | (e << 21)) ^ ((e >>> 25) | (e << 7))) + ((e & f) ^ (~e & g)) + K[i] + w[i]) | 0;
+            const t2 = ((((a >>> 2) | (a << 30)) ^ ((a >>> 13) | (a << 19)) ^ ((a >>> 22) | (a << 10))) + ((a & b) ^ (a & c) ^ (b & c))) | 0;
+            x = g; g = f; f = e; e = (d + t1) | 0; d = c; c = b; b = a; a = (t1 + t2) | 0;
+          }
+          h = [h[0] + a | 0, h[1] + b | 0, h[2] + c | 0, h[3] + d | 0, h[4] + e | 0, h[5] + f | 0, h[6] + g | 0, h[7] + x | 0];
+        }
+        return h.map(v => (v >>> 0).toString(16).padStart(8, "0")).join("").toUpperCase();
+      }
+
+      // Токен Sec-MS-GEC: SHA-256 от «время в тиках Windows, округлённое до 5 минут + TrustedClientToken»
+      async function edgeGec() {
+        let t = Math.floor(Date.now() / 1000) + 11644473600;
+        t -= t % 300;
+        const s = t + "0000000" + EDGE_CFG.token;
+        try {
+          if (globalThis.crypto?.subtle) {
+            const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
+            return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, "0")).join("").toUpperCase();
+          }
+        } catch {}
+        return sha256hex(s);
+      }
+
+      const rid = () => (globalThis.crypto?.randomUUID ? crypto.randomUUID() : "x".repeat(32).replace(/x/g, () => (Math.random() * 16 | 0).toString(16))).replace(/-/g, "");
+      const xmlEsc = (s) => String(s).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, "")
+        .replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&apos;" }[c]));
+
+      async function edgeFetch(text, voice, rate) {
+        const gec = await edgeGec();
+        const id = rid();
+        const url = `${EDGE_CFG.ws}?TrustedClientToken=${EDGE_CFG.token}&ConnectionId=${id}&Sec-MS-GEC=${gec}&Sec-MS-GEC-Version=${EDGE_CFG.ver}`;
+        const pct = Math.round((rate - 1) * 100);
+        const ts = new Date().toUTCString();
+        const ssml = `<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='${voice.slice(0, 5)}'><voice name='${voice}'><prosody pitch='+0Hz' rate='${pct >= 0 ? "+" : ""}${pct}%' volume='+0%'>${xmlEsc(text)}</prosody></voice></speak>`;
+        return new Promise((res, rej) => {
+          const ws = new WebSocket(url);
+          ws.binaryType = "arraybuffer";
+          cloud.ws = ws;
+          const parts = [];
+          const timer = setTimeout(() => { try { ws.close(); } catch {} rej(new Error("таймаут")); }, EDGE_CFG.timeout);
+          ws.onopen = () => {
+            ws.send(`X-Timestamp:${ts}\r\nContent-Type:application/json; charset=utf-8\r\nPath:speech.config\r\n\r\n{"context":{"synthesis":{"audio":{"metadataoptions":{"sentenceBoundaryEnabled":"false","wordBoundaryEnabled":"false"},"outputFormat":"audio-24khz-48kbitrate-mono-mp3"}}}}`);
+            ws.send(`X-RequestId:${id}\r\nContent-Type:application/ssml+xml\r\nX-Timestamp:${ts}Z\r\nPath:ssml\r\n\r\n${ssml}`);
+          };
+          ws.onmessage = (e) => {
+            if (typeof e.data === "string") {
+              if (e.data.includes("Path:turn.end")) {
+                clearTimeout(timer);
+                try { ws.close(); } catch {}
+                parts.length ? res(new Blob(parts, { type: "audio/mpeg" })) : rej(new Error("пустой ответ"));
+              }
+              return;
+            }
+            const hl = new DataView(e.data).getUint16(0);
+            const head = new TextDecoder().decode(new Uint8Array(e.data, 2, hl));
+            if (head.includes("Path:audio")) parts.push(e.data.slice(2 + hl));
+          };
+          ws.onerror = () => { clearTimeout(timer); rej(new Error("соединение отклонено")); };
+          ws.onclose = () => { clearTimeout(timer); rej(new Error("соединение закрыто")); };
+        });
+      }
+
+      // Прокси с OpenAI-совместимым API (например, self-hosted openai-edge-tts): POST /v1/audio/speech
+      async function proxyFetch(base, text, voice, rate) {
+        const ctl = (cloud.ctl = new AbortController());
+        const timer = setTimeout(() => ctl.abort(), 15000);
+        try {
+          const key = (state.settings.ttsProxyKey || "").trim();
+          const u = /\/audio\/speech\/?$/.test(base) ? base : base.replace(/\/+$/, "") + "/v1/audio/speech";
+          const r = await fetch(u, {
+            method: "POST",
+            signal: ctl.signal,
+            headers: { "Content-Type": "application/json", ...(key ? { Authorization: "Bearer " + key } : {}) },
+            body: JSON.stringify({ model: "tts-1", input: text, voice, response_format: "mp3", speed: rate })
+          });
+          if (!r.ok) throw new Error("HTTP " + r.status);
+          return await r.blob();
+        } finally { clearTimeout(timer); }
+      }
+
+      // Получение аудио с кэшем: повторы фразы не ходят в сеть повторно
+      async function cloudGet(text, voice, rate) {
+        const key = `${voice}|${rate}|${text}`;
+        if (cloud.cache.has(key)) return cloud.cache.get(key);
+        const proxy = (state.settings.ttsProxyUrl || "").trim();
+        const errs = [];
+        let blob = null;
+        if (proxy) { try { blob = await proxyFetch(proxy, text, voice, rate); } catch (e) { errs.push("прокси: " + (e.message || e)); } }
+        if (!blob && !(cloud.down && Date.now() - cloud.down < EDGE_CFG.downMs)) {
+          try { blob = await edgeFetch(text, voice, rate); } catch (e) { errs.push("Edge: " + (e.message || e)); }
+        }
+        if (!blob) throw new Error(errs.join("; ") || "облако временно отключено");
+        const url = URL.createObjectURL(blob);
+        cloud.cache.set(key, url);
+        if (cloud.cache.size > 24) {
+          const k = cloud.cache.keys().next().value;
+          try { URL.revokeObjectURL(cloud.cache.get(k)); } catch {}
+          cloud.cache.delete(k);
+        }
+        return url;
+      }
+
+      // Какой облачный голос нужен для текста (null → системный голос)
+      function cloudVoiceFor(text) {
+        const s = state.settings;
+        if (s.ttsCloud === false) return null;
+        const pref = s.ttsVoiceURI || "auto";
+        if (pref !== "auto" && pref !== "dmitry" && !pref.startsWith("edge:")) return null;
+        if (cloud.down && Date.now() - cloud.down < EDGE_CFG.downMs && !(s.ttsProxyUrl || "").trim()) return null;
+        const lang = detectLang(text);
+        let name = pref === "dmitry" ? EDGE_DEFAULT.ru : pref.startsWith("edge:") ? pref.slice(5) : "";
+        if (!name || name.slice(0, 2) !== lang) name = EDGE_DEFAULT[lang];
+        return { name, lang };
+      }
+
+      function cloudAbort() {
+        cloud.tok = null;
+        try { cloud.ws?.close(); } catch {}
+        try { cloud.ctl?.abort(); } catch {}
+        cloud.ws = cloud.ctl = null;
+        const a = cloud.el;
+        if (a) { a.onended = a.onerror = null; try { a.pause(); } catch {} }
+      }
+
+      // Единственный <audio>: «разблокируется» жестом пользователя (важно для iOS), затем переиспользуется таймером
+      function cloudPrime() {
+        try {
+          if (!cloud.el) { cloud.el = new Audio(); cloud.el.setAttribute("playsinline", ""); }
+          cloud.el.src = ttsSilentWav();
+          cloud.el.play().catch(() => {});
+        } catch {}
+      }
+
+      function cloudSpeak(run, cv, fallback) {
+        const tok = (cloud.tok = {});
+        const live = () => cloud.tok === tok && ttsRun === run && !run.paused;
+        const rate = Math.min(2, Math.max(0.5, Number(state.settings.ttsRate) || 1));
+        const bad = (e, soft) => {
+          if (!live()) return;
+          if (!soft) {
+            cloud.down = Date.now();
+            toast(`Edge TTS недоступен (${e?.message || e?.name || "ошибка"}) — включён системный голос`);
+          }
+          fallback();
+        };
+        cloudGet(run.text, cv.name, rate).then((url) => {
+          if (!live()) return;
+          const a = cloud.el || (cloud.el = new Audio());
+          a.onended = () => { if (live()) { run.speaking = false; ttsAfter(run); } };
+          a.onerror = () => bad(new Error("не удалось воспроизвести поток"));
+          a.src = url;
+          a.play().then(() => {
+            if (!live()) return;
+            run.startedAt = Date.now();
+            if (!cloud.told) { cloud.told = true; toast(`☁ Edge TTS: ${cv.name.replace(/^[a-z]{2}-[A-Z]{2}-|Neural$/g, "")}`); }
+            renderBar();
+          }).catch((e) => bad(e, e?.name === "NotAllowedError"));
+        }).catch((e) => bad(e));
+      }
+
+      function unlockAudio() {
+        try {
+          const AC = window.AudioContext || window.webkitAudioContext;
+          if (AC) {
+            const c = new AC();
+            if (c.state === "suspended") c.resume();
+          }
+          if (navigator.audioSession) navigator.audioSession.type = "playback";
+        } catch {}
+      }
+
+      function ttsSilentWav() {
+        if (ttsKeep.wav) return ttsKeep.wav;
+        const rate = 8000;
+        const buf = new ArrayBuffer(44 + rate);
+        const v = new DataView(buf);
+        const w4 = (o, str) => {
+          for (let i = 0; i < 4; i++) v.setUint8(o + i, str.charCodeAt(i));
+        };
+        w4(0, "RIFF");
+        v.setUint32(4, 36 + rate, true);
+        w4(8, "WAVE");
+        w4(12, "fmt ");
+        v.setUint32(16, 16, true);
+        v.setUint16(20, 1, true);
+        v.setUint16(22, 1, true);
+        v.setUint32(24, rate, true);
+        v.setUint32(28, rate, true);
+        v.setUint16(32, 1, true);
+        v.setUint16(34, 8, true);
+        w4(36, "data");
+        v.setUint32(40, rate, true);
+        new Uint8Array(buf, 44).fill(128);
+        return (ttsKeep.wav = URL.createObjectURL(new Blob([buf], { type: "audio/wav" })));
+      }
+
+      function ttsKeepStart(title) {
+        ttsKeepStop();
+        // На Desktop Edge запуск фонового <audio> одновременно с Web Speech API может перехватывать аудиофокус у Online-голоса Дмитрий.
+        // Поэтому бесшумный WAV запускаем только на iOS или когда вкладка свёрнута.
+        if (isIOSDevice() || document.hidden) {
+          try {
+            unlockAudio();
+            const a = new Audio(ttsSilentWav());
+            a.loop = true;
+            a.volume = 0.01;
+            a.play().catch(() => {});
+            ttsKeep.audio = a;
+          } catch {}
+        }
+        try {
+          if ("mediaSession" in navigator) {
+            navigator.mediaSession.metadata = new MediaMetadata({
+              title: "Озвучка мысли",
+              artist: String(title || "").slice(0, 80)
+            });
+            navigator.mediaSession.setActionHandler("pause", () => ttsPause());
+            navigator.mediaSession.setActionHandler("play", () => ttsResume());
+            navigator.mediaSession.setActionHandler("stop", () => ttsStop());
+            navigator.mediaSession.setActionHandler("nexttrack", () => stepSlide(1));
+            navigator.mediaSession.setActionHandler("previoustrack", () => stepSlide(-1));
+          }
+        } catch {}
+        try {
+          const url = URL.createObjectURL(
+            new Blob(["setInterval(function(){postMessage(1)},1000)"], { type: "text/javascript" })
+          );
+          const w = new Worker(url);
+          w.onmessage = () => ttsTick();
+          ttsKeep.worker = w;
+          ttsKeep.url = url;
+        } catch {
+          const id = setInterval(ttsTick, 1000);
+          ttsKeep.worker = { terminate: () => clearInterval(id) };
+        }
+      }
+
+      function ttsKeepStop() {
+        try { ttsKeep.audio?.pause(); } catch {}
+        ttsKeep.audio = null;
+        try { ttsKeep.worker?.terminate(); } catch {}
+        ttsKeep.worker = null;
+        if (ttsKeep.url) {
+          try { URL.revokeObjectURL(ttsKeep.url); } catch {}
+          ttsKeep.url = null;
+        }
+        try {
+          if ("mediaSession" in navigator) {
+            navigator.mediaSession.metadata = null;
+            navigator.mediaSession.setActionHandler("pause", null);
+            navigator.mediaSession.setActionHandler("play", null);
+            navigator.mediaSession.setActionHandler("stop", null);
+          }
+        } catch {}
+      }
+
+      function ttsStop() {
+        clearTimeout(ttsSpeakTimer);
+        ttsRun = null;
+        cloudAbort();
+        window.__activeUtterance = null;
+        ttsKeepStop();
+        try {
+          if (window.speechSynthesis?.speaking || window.speechSynthesis?.pending) {
+            window.speechSynthesis.cancel();
+          }
+        } catch {}
+        render();
+      }
+
+      function ttsPause() {
+        if (!ttsRun) return;
+        clearTimeout(ttsSpeakTimer);
+        ttsRun.paused = true;
+        ttsRun.speaking = false;
+        ttsRun.nextAt = 0;
+        cloudAbort();
+        window.__activeUtterance = null;
+        try {
+          if (window.speechSynthesis?.speaking || window.speechSynthesis?.pending) {
+            window.speechSynthesis.cancel();
+          }
+        } catch {}
+        render();
+      }
+
+      function ttsResume() {
+        if (!ttsRun) return;
+        ttsRun.paused = false;
+        const repeat = state.settings.ttsRepeat;
+        ttsRun.max = repeat === "∞" ? Infinity : Number(repeat) || 1;
+        if (ttsRun.phase === "done") ttsRun.n = 0;
+        if (state.settings.ttsCloud !== false) cloudPrime();
+        ttsSay(ttsRun);
+        render();
+      }
+
+      function ttsAfter(run) {
+        if (ttsRun !== run || run.paused) return;
+        if (run.n >= run.max) {
+          const doc = currentDoc();
+          if (state.settings.ttsAutoNext && doc && doc.currentIndex < doc.deconstruct_text.length - 1) {
+            doc.currentIndex++;
+            ui.slideDir = 1;
+            commit();
+            const nextTxt = currentSegmentText();
+            run.text = stripMarkdownForSpeech(nextTxt);
+            run.rawTitle = nextTxt;
+            run.n = 0;
+            run.phase = "waiting";
+            run.nextAt = Date.now() + ttsGapSec() * 1000;
+            render();
+            return;
+          }
+          run.phase = "done";
+          run.nextAt = 0;
+          ttsKeepStop();
+          render();
+          toast(`Готово: ${run.n} ${run.n === 1 ? "повтор" : run.n < 5 ? "повтора" : "повторов"}`);
+        } else {
+          run.phase = "waiting";
+          run.nextAt = Date.now() + ttsGapSec() * 1000;
+          renderBar();
+        }
+      }
+
+      function ttsSay(run) {
+        if (ttsRun !== run || run.paused) return;
+        const ss = window.speechSynthesis || null;
+        cloudAbort();
+        clearTimeout(ttsSpeakTimer);
+
+        const launchSpeak = () => {
+          if (ttsRun !== run || run.paused) return;
+          run.n++;
+          run.speaking = true;
+          run.phase = "playing";
+          run.startedAt = Date.now();
+          run.nextAt = 0;
+
+          const cv = cloudVoiceFor(run.text);
+          const sysSpeak = () => {
+          if (!ss) { run.speaking = false; ttsAfter(run); return; }
+          const u = new SpeechSynthesisUtterance(run.text);
+          // Сохраняем глобальную ссылку, чтобы сборщик мусора V8 в Edge не удалил объект во время буферизации голоса Дмитрий
+          window.__activeUtterance = u;
+
+          const hasCyr = /[а-яё]/i.test(run.text) || !/[a-z]/i.test(run.text);
+          const v = pickSystemVoice(detectLang(run.text)) || pickBestVoice(hasCyr);
+          if (v) {
+            try {
+              u.voice = v;
+              u.lang = v.lang || (LANG_BCP[detectLang(run.text)]);
+            } catch {
+              u.lang = LANG_BCP[detectLang(run.text)];
+            }
+          } else {
+            u.lang = LANG_BCP[detectLang(run.text)];
+          }
+
+          u.rate = Math.min(2, Math.max(0.5, Number(state.settings.ttsRate) || 1));
+          u.pitch = 1.0;
+          u.volume = 1.0;
+
+          u.onstart = () => {
+            if (ttsRun !== run) return;
+            run.speaking = true;
+            run.startedAt = Date.now();
+            renderBar();
+          };
+
+          u.onend = () => {
+            if (window.__activeUtterance === u) window.__activeUtterance = null;
+            if (ttsRun !== run || run.paused) return;
+            run.speaking = false;
+            ttsAfter(run);
+          };
+
+          u.onerror = (ev) => {
+            if (window.__activeUtterance === u) window.__activeUtterance = null;
+            const errType = ev?.error || "";
+            if (errType === "canceled" || errType === "interrupted") {
+              return;
+            }
+            if (ttsRun !== run || run.paused) return;
+            run.speaking = false;
+            ttsAfter(run);
+          };
+
+          try {
+            if (ss.paused) ss.resume();
+          } catch {}
+
+          try {
+            ss.speak(u);
+          } catch {
+            run.speaking = false;
+          }
+          renderBar();
+          };
+          if (cv) cloudSpeak(run, cv, sysSpeak); else sysSpeak();
+        };
+
+        // Если синтезатор занят предыдущей фразой — останавливаем и запускаем через короткую паузу
+        if (ss && (ss.speaking || ss.pending)) {
+          try { ss.cancel(); } catch {}
+          ttsSpeakTimer = setTimeout(launchSpeak, 65);
+          return;
+        }
+
+        // Если голос Дмитрий в Edge (или системные голоса на iOS) уже в списке — запускаем синхронно в момент клика
+        const currentVoices = getAvailableVoices();
+        if (cloudVoiceFor(run.text) || findDmitryVoice(currentVoices) || (isIOSDevice() && currentVoices.length > 0)) {
+          launchSpeak();
+        } else {
+          // Если Edge ещё подгружает облачные голоса Natural — дожидаемся именно появления голоса Дмитрий
+          ensureVoicesLoaded(1600).then(() => {
+            launchSpeak();
+          });
+        }
+      }
+
+      function ttsTick() {
+        const run = ttsRun;
+        if (!run || run.paused) return;
+        const ss = window.speechSynthesis;
+        if (run.speaking) {
+          try { if (ss.paused) ss.resume(); } catch {}
+          if (Date.now() - run.startedAt > 120000) {
+            run.speaking = false;
+            try { ss.cancel(); } catch {}
+            ttsAfter(run);
+          }
+          return;
+        }
+        if (run.nextAt) {
+          if (Date.now() >= run.nextAt) {
+            ttsSay(run);
+          } else {
+            renderBar();
+          }
+        }
+      }
+
+      document.addEventListener("visibilitychange", ttsTick);
+      globalThis.addEventListener("pageshow", ttsTick);
+
+      function startTtsForText(rawText, customKey = null) {
+        if (!("speechSynthesis" in window) && state.settings.ttsCloud === false) {
+          toast("Озвучка не поддерживается этим браузером");
+          return;
+        }
+        if (!rawText) return;
+        const cleanSpeech = stripMarkdownForSpeech(rawText);
+        const doc = currentDoc();
+        const segKey = customKey || `${state.activeSource}:${doc?.id}:${doc?.currentIndex}`;
+
+        if (ttsRun && ttsRun.segKey === segKey && (ttsRun.speaking || ttsRun.nextAt)) {
+          ttsPause();
+          return;
+        }
+
+        const repeat = state.settings.ttsRepeat;
+        const run = {
+          segKey,
+          rawTitle: rawText,
+          text: cleanSpeech,
+          n: 0,
+          max: repeat === "∞" ? Infinity : Number(repeat) || 1,
+          speaking: false,
+          paused: false,
+          phase: "playing",
+          startedAt: 0,
+          nextAt: 0
+        };
+        ttsRun = run;
+        if (state.settings.ttsCloud !== false) cloudPrime();
+        ttsKeepStart(cleanSpeech);
+        ttsSay(run);
+        render();
+      }
+
+      function startTtsForCurrentThought() {
+        startTtsForText(currentSegmentText());
+      }
+
+      // ——— ИКОНКИ ———
+      const ICONS = {
+        horn: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11v2a1 1 0 0 0 1 1h3l5 4V6L7 10H4a1 1 0 0 0-1 1zm13.5-2.5a4.5 4.5 0 0 1 0 7m2.8-9.8a8 8 0 0 1 0 12.6"/></svg>',
+        copy: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>',
+        check: '<svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>',
+        bookmark: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>',
+        play: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>',
+        stop: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6h12v12H6z"/></svg>',
+        up: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg>',
+        down: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>',
+        minimize: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14h6v6m10-10h-6V4m0 6 7-7M3 21l7-7"/></svg>',
+        close: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+        scissors: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"/></svg>'
+      };
+
+      // ——— ОТРИСОВКА ГЛАВНОГО ЭКРАНА И ПЛЕЕРА ———
+      const stageEl = document.getElementById("stage");
+      const barEl = document.getElementById("bar");
+      const sheetEl = document.getElementById("sheet");
+      const edgeBar = document.getElementById("edge-bar");
+      const tsEl = document.getElementById("ts");
+
+      function updateRailIndicators() {
+        const totalBmSlides = getAllBookmarkedSegmentsMap().length;
+        const badge = document.getElementById("bm-badge");
+        if (badge) {
+          badge.hidden = totalBmSlides === 0;
+          badge.textContent = totalBmSlides > 99 ? "99+" : String(totalBmSlides);
+        }
+        const bmBtn = document.getElementById("btn-rail-bookmarks");
+        const histBtn = document.getElementById("btn-rail-history");
+        const isBmMode = state.activeSource === "bookmarks";
+
+        if (bmBtn) bmBtn.classList.toggle("mode-active", isBmMode);
+        if (histBtn) histBtn.classList.toggle("mode-active", !isBmMode);
+      }
+
+      function render() {
+        applyTypographyAndTheme();
+        updateRailIndicators();
+
+        const doc = currentDoc();
+        if (!doc || !doc.deconstruct_text.length) {
+          stageEl.innerHTML = `
+            <div class="slide-viewport">
+              <div class="thought-card"><p>Добавь текст, чтобы разбить его на отдельные мысли.</p></div>
+            </div>
+          `;
+          edgeBar.style.width = "0%";
+          renderBar();
+          renderSheet();
+          return;
+        }
+
+        const total = doc.deconstruct_text.length;
+        const idx = Math.min(Math.max(0, doc.currentIndex || 0), total - 1);
+        doc.currentIndex = idx;
+        const currentThought = doc.deconstruct_text[idx];
+        const segKey = `${state.activeSource}:${doc.id}:${idx}`;
+        const isSpeaking = !!(ttsRun && ttsRun.segKey === segKey && (ttsRun.speaking || ttsRun.nextAt) && !ttsRun.paused);
+        const isBookmarked = isThoughtBookmarked(currentThought);
+        const isCopied = ui.justCopiedKey === segKey;
+        const animClass = ui.slideDir < 0 ? "enter-prev" : "enter-next";
+
+        stageEl.innerHTML = `
+          <div class="slide-viewport" id="touch-zone">
+            <div class="thought-card ${animClass}" key="${segKey}">
+              ${renderPureMarkdown(currentThought)}
+            </div>
+            <div class="megaphone-row">
+              <button class="horn-btn${isSpeaking ? " speaking" : ""}" data-a="tts-toggle" aria-label="Озвучить мысль" title="Озвучить с повтором">
+                ${ICONS.horn}
+              </button>
+              <button class="horn-btn${isCopied ? " copied" : ""}" data-a="copy-current" aria-label="Скопировать мысль" title="Скопировать мысль (C)">
+                ${isCopied ? ICONS.check : ICONS.copy}
+              </button>
+              <button class="horn-btn${isBookmarked ? " bookmarked" : ""}" data-a="bookmark-toggle" aria-label="${isBookmarked ? "Убрать из закладок" : "В закладки"}" title="${isBookmarked ? "В журнале закладок (нажми, чтобы убрать)" : "Сохранить в журнал закладок (D)"}">
+                ${ICONS.bookmark}
+              </button>
+              ${currentThought.split(/\s+/).length > 4 ? `
+                <button class="micro-action-btn" data-a="open-split-current" aria-label="Разделить эту мысль" title="Разделить мысль на две">
+                  ${ICONS.scissors}
+                </button>
+              ` : ""}
+            </div>
+          </div>
+          <div class="nav-controls">
+            <button class="nav-arrow" data-a="prev" ${idx <= 0 ? "disabled" : ""} aria-label="Предыдущая мысль">&lt;</button>
+            <button class="slide-counter mono" data-a="open-jump" title="Перейти к мысли">${idx + 1} / ${total}</button>
+            <button class="nav-arrow" data-a="next" ${idx >= total - 1 ? "disabled" : ""} aria-label="Следующая мысль">&gt;</button>
+          </div>
+        `;
+
+        const pct = total > 1 ? Math.round(((idx + 1) / total) * 100) : 100;
+        edgeBar.style.width = `${pct}%`;
+
+        renderBar();
+        renderSheet();
+      }
+
+      function renderBar() {
+        if (!ttsRun) {
+          barEl.hidden = true;
+          barEl.innerHTML = "";
+          barEl.dataset.sig = "";
+          return;
+        }
+
+        barEl.hidden = false;
+        const collapsed = !!state.settings.playerCollapsed;
+        const expanded = !!state.settings.playerExpanded;
+        barEl.classList.toggle("collapsed", collapsed);
+
+        const playing = (ttsRun.speaking || ttsRun.nextAt > 0) && !ttsRun.paused;
+        const rem = ttsRun.nextAt ? Math.max(0, Math.ceil((ttsRun.nextAt - Date.now()) / 1000)) : 0;
+        const statusLabel = ttsRun.speaking
+          ? `Озвучивается (${ttsRun.n}${ttsRun.max === Infinity ? "" : "/" + ttsRun.max})`
+          : ttsRun.nextAt
+            ? `Пауза ${mmss(rem)} (${ttsRun.n}${ttsRun.max === Infinity ? "" : "/" + ttsRun.max})`
+            : ttsRun.phase === "done"
+              ? "Завершено"
+              : "Остановлено";
+
+        const sig = JSON.stringify([
+          collapsed,
+          expanded,
+          playing,
+          ttsRun.rawTitle,
+          state.settings.ttsVoiceURI,
+          state.settings.ttsCloud,
+          state.settings.ttsRepeat,
+          state.settings.ttsIntervalSec,
+          state.settings.ttsRate,
+          state.settings.ttsAutoNext,
+          getAvailableVoices().length
+        ]);
+
+        if (collapsed) {
+          barEl.innerHTML = `
+            <div class="pl-mini">
+              ${playing ? '<span class="mini-dot"></span>' : ""}
+              <button class="mono" data-a="pl-collapse-tog" title="Развернуть плеер">${esc(statusLabel)}</button>
+              <button data-a="pl-play-tog" aria-label="${playing ? "Пауза" : "Играть"}" style="display:grid;place-items:center;width:22px;height:22px;color:var(--ac)">
+                ${playing ? ICONS.stop : ICONS.play}
+              </button>
+              <button data-a="pl-close" aria-label="Закрыть плеер" style="display:grid;place-items:center;width:20px;height:20px;opacity:0.6">
+                ${ICONS.close}
+              </button>
+            </div>
+          `;
+          barEl.dataset.sig = sig;
+          return;
+        }
+
+        if (barEl.dataset.sig === sig) {
+          const st = barEl.querySelector("[data-st]");
+          if (st) st.textContent = statusLabel;
+          return;
+        }
+
+        const gap = ttsGapSec();
+        const rate = Number(state.settings.ttsRate) || 1;
+
+        barEl.innerHTML = `
+          <div class="pl">
+            <div class="pl-r">
+              <div class="pl-n">
+                <b>${esc(ttsRun.rawTitle)}</b>
+                <small data-st>${esc(statusLabel)}</small>
+              </div>
+              <button class="pl-b" data-a="pl-play-tog" aria-label="${playing ? "Остановить" : "Играть"}">
+                ${playing ? ICONS.stop : ICONS.play}
+              </button>
+              <button class="ic-b" data-a="pl-expand-tog" aria-expanded="${expanded}" title="Настройки повтора и паузы">
+                ${expanded ? ICONS.down : ICONS.up}
+              </button>
+              <button class="ic-b" data-a="pl-collapse-tog" title="Свернуть плеер в мини-режим">
+                ${ICONS.minimize}
+              </button>
+              <button class="ic-b" data-a="pl-close" title="Закрыть плеер">
+                ${ICONS.close}
+              </button>
+            </div>
+            ${expanded ? `
+              <div class="pl-x">
+                <label>
+                  Повторы (до 25 или ∞)
+                  <select data-c="tts-repeat">
+                    ${REPEATS.map(r => `<option value="${r}"${r === state.settings.ttsRepeat ? " selected" : ""}>${r}</option>`).join("")}
+                  </select>
+                </label>
+                <label>
+                  Пауза между повторами <span class="mono" data-tiv>${fmtSec(gap)}</span>
+                  <input type="range" min="10" max="600" step="10" value="${gap}" data-i="tts-iv" data-c="tts-iv">
+                </label>
+                <label style="grid-column: 1 / -1">
+                  <span>Голос озвучки · <b class="mono" style="color:var(--ac)">${esc(getActiveVoiceLabel())}</b></span>
+                  <div style="display:flex;gap:6px;align-items:center">
+                    <select data-c="tts-voice" style="flex:1">
+                      ${buildVoiceOptionsHtml()}
+                    </select>
+                    <button class="btn gh sm" data-a="refresh-voices" title="Обновить список голосов Edge / iOS">↻</button>
+                  </div>
+                </label>
+                <div class="pl-extra-row">
+                  <label class="chk">
+                    <input type="checkbox" data-c="tts-autonext"${state.settings.ttsAutoNext ? " checked" : ""}>
+                    <span>После повторов переходить к следующей мысли</span>
+                  </label>
+                  <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mu)">
+                    <span>Скорость <b class="mono" data-trate>${rate.toFixed(1)}×</b></span>
+                    <input type="range" min="0.5" max="2" step="0.1" value="${rate}" data-i="tts-rate" data-c="tts-rate" style="width:90px">
+                  </label>
+                </div>
+              </div>
+            ` : ""}
+          </div>
+        `;
+        barEl.dataset.sig = sig;
+      }
+
+      // ——— ОПЕРАЦИИ РАЗДЕЛЕНИЯ И СКЛЕИВАНИЯ МЫСЛЕЙ (ДЛЯ ТЕКСТОВ И ДЛЯ ЖУРНАЛА ЗАКЛАДОК) ———
+      function splitCurrentThoughtAtWord(widx) {
+        const doc = currentDoc();
+        if (!doc || !(widx > 0)) return;
+        const cur = doc.deconstruct_text[doc.currentIndex];
+        const words = cur.split(/\s+/).filter(Boolean);
+        if (widx >= words.length) return;
+
+        const firstPart = words.slice(0, widx).join(" ");
+        const secondPart = words.slice(widx).join(" ");
+
+        if (doc.isVirtualStream) {
+          const item = doc.flatMap[doc.currentIndex];
+          const bm = state.bookmarks_journal.find(x => x.id === item?.bmId);
+          if (bm) {
+            bm.deconstruct_text.splice(item.chunkIdx, 1, firstPart, secondPart);
+            bm.source_text = bm.deconstruct_text.join(" ");
+          }
+        } else {
+          doc.deconstruct_text.splice(doc.currentIndex, 1, firstPart, secondPart);
+        }
+        commit();
+      }
+
+      function mergeCurrentThoughtWithNext() {
+        const doc = currentDoc();
+        if (!doc || doc.currentIndex >= doc.deconstruct_text.length - 1) return;
+
+        if (doc.isVirtualStream) {
+          const curItem = doc.flatMap[doc.currentIndex];
+          const nextItem = doc.flatMap[doc.currentIndex + 1];
+          const bmCur = state.bookmarks_journal.find(x => x.id === curItem?.bmId);
+          if (!bmCur) return;
+
+          if (curItem.bmId === nextItem.bmId) {
+            const i = curItem.chunkIdx;
+            bmCur.deconstruct_text.splice(i, 2, `${bmCur.deconstruct_text[i]} ${bmCur.deconstruct_text[i + 1]}`);
+            bmCur.source_text = bmCur.deconstruct_text.join(" ");
+          } else {
+            const bmNextIdx = state.bookmarks_journal.findIndex(x => x.id === nextItem?.bmId);
+            if (bmNextIdx !== -1) {
+              const bmNext = state.bookmarks_journal[bmNextIdx];
+              const nextText = bmNext.deconstruct_text[nextItem.chunkIdx];
+              bmCur.deconstruct_text[curItem.chunkIdx] = `${bmCur.deconstruct_text[curItem.chunkIdx]} ${nextText}`;
+              bmCur.source_text = bmCur.deconstruct_text.join(" ");
+              bmNext.deconstruct_text.splice(nextItem.chunkIdx, 1);
+              if (bmNext.deconstruct_text.length === 0) {
+                state.bookmarks_journal.splice(bmNextIdx, 1);
+              } else {
+                bmNext.source_text = bmNext.deconstruct_text.join(" ");
+              }
+            }
+          }
+        } else {
+          const i = doc.currentIndex;
+          doc.deconstruct_text.splice(i, 2, `${doc.deconstruct_text[i]} ${doc.deconstruct_text[i + 1]}`);
+        }
+        commit();
+      }
+
+      // ——— НАВИГАЦИЯ ПО МЫСЛЯМ ———
+      function stepSlide(delta) {
+        const doc = currentDoc();
+        if (!doc || !doc.deconstruct_text.length) return;
+        const nextIdx = doc.currentIndex + delta;
+        if (nextIdx < 0 || nextIdx >= doc.deconstruct_text.length) return;
+        doc.currentIndex = nextIdx;
+        ui.slideDir = delta;
+        commit();
+
+        if (ttsRun && !ttsRun.paused && (ttsRun.speaking || ttsRun.nextAt)) {
+          startTtsForCurrentThought();
+        } else {
+          render();
+        }
+      }
+
+      // ——— МОДАЛЬНЫЕ ОКНА (ВВОД, ИСТОРИЯ, ЖУРНАЛ ЗАКЛАДОК, НАСТРОЙКИ, РАЗДЕЛЕНИЕ) ———
+      function openSheet(name) {
+        ui.sheet = name;
+        document.body.classList.add("lock");
+        renderSheet();
+      }
+
+      function closeSheet() {
+        ui.sheet = null;
+        document.body.classList.remove("lock");
+        sheetEl.hidden = true;
+        sheetEl.innerHTML = "";
+      }
+
+      function renderSheet() {
+        if (!ui.sheet) {
+          sheetEl.hidden = true;
+          sheetEl.innerHTML = "";
+          return;
+        }
+        sheetEl.hidden = false;
+
+        if (ui.sheet === "input") {
+          const mode = state.settings.splitMode;
+          sheetEl.innerHTML = `
+            <div class="sh" role="dialog" aria-modal="true">
+              <div class="shh">
+                <span>Новый текст для деконструкции</span>
+                <button class="ic-b" data-a="close-sheet" aria-label="Закрыть">${ICONS.close}</button>
+              </div>
+              <p class="cap">Текст сохраняется строго слово в слово. Номера пунктов (1., 2.) и слова до «—» не разрываются между слайдами.</p>
+              <textarea id="source-input" rows="8" placeholder="Вставь или напиши текст...">${esc(ui.draftText)}</textarea>
+              <div class="sec">
+                <p class="cap">Режим разбиения на мысли</p>
+                <div class="seg-pills">
+                  <button class="pill${mode === "sentences" ? " on" : ""}" data-a="set-mode" data-m="sentences">По предложениям</button>
+                  <button class="pill${mode === "clauses" ? " on" : ""}" data-a="set-mode" data-m="clauses">Дробно (по микро-смыслам)</button>
+                  <button class="pill${mode === "ai" ? " on" : ""}" data-a="set-mode" data-m="ai">Умное разбиение ИИ (слово в слово)</button>
+                </div>
+              </div>
+              <div class="btn-row">
+                <button class="btn" data-a="run-deconstruct" ${ui.aiBusy ? "disabled" : ""}>
+                  ${ui.aiBusy ? "Разбиваю на мысли…" : "Разбить и открыть слайд-шоу"}
+                </button>
+              </div>
+            </div>
+          `;
+          return;
+        }
+
+        if (ui.sheet === "history") {
+          const items = state.log_input_history;
+          const listHtml = items.map(item => {
+            const isAct = state.activeSource === "history" && item.id === state.activeId;
+            const isExp = ui.expandedHistId === item.id;
+            const preview = item.deconstruct_text[0] || item.source_text.slice(0, 120);
+            const dateStr = new Date(item.createdAt).toLocaleString("ru-RU", {
+              day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit"
+            });
+
+            const chunksHtml = isExp ? `
+              <ul class="chunks-list">
+                ${item.deconstruct_text.map((seg, idx) => `
+                  <li class="chunk-item">
+                    <span class="chunk-text" data-a="hist-jump" data-id="${item.id}" data-idx="${idx}">
+                      ${esc(seg)}
+                    </span>
+                    <div class="chunk-btns">
+                      <button class="btn sm gh" data-a="chunk-copy" data-id="${item.id}" data-idx="${idx}" title="Скопировать кусочек">Копир.</button>
+                      <button class="btn sm gh" data-a="chunk-bookmark" data-id="${item.id}" data-idx="${idx}" title="Сохранить в закладки">★</button>
+                      ${idx < item.deconstruct_text.length - 1 ? `
+                        <button class="btn sm gh" data-a="chunk-merge" data-id="${item.id}" data-idx="${idx}" title="Склеить со следующей мыслью">+</button>
+                      ` : ""}
+                    </div>
+                  </li>
+                `).join("")}
+              </ul>
+            ` : "";
+
+            return `
+              <li class="hist-card${isAct ? " active" : ""}">
+                <div class="hist-top">
+                  <button class="hist-preview" data-a="hist-select" data-id="${item.id}">
+                    ${esc(preview.length > 140 ? preview.slice(0, 140) + "…" : preview)}
+                  </button>
+                </div>
+                <div class="hist-meta">
+                  <span>${dateStr} · шаг ${(item.currentIndex || 0) + 1} из ${item.deconstruct_text.length}</span>
+                  <div class="hist-actions">
+                    <button class="btn sm gh" data-a="hist-toggle-chunks" data-id="${item.id}">
+                      ${isExp ? "Скрыть кусочки" : `Кусочки (${item.deconstruct_text.length})`}
+                    </button>
+                    <button class="btn sm" data-a="hist-select" data-id="${item.id}">Открыть</button>
+                    ${items.length > 1 ? `
+                      <button class="btn sm gh wn" data-a="hist-delete" data-id="${item.id}" aria-label="Удалить">✕</button>
+                    ` : ""}
+                  </div>
+                </div>
+                ${chunksHtml}
+              </li>
+            `;
+          }).join("");
+
+          sheetEl.innerHTML = `
+            <div class="sh" role="dialog" aria-modal="true">
+              <div class="shh">
+                <span>Сохранённые тексты (${items.length})</span>
+                <button class="ic-b" data-a="close-sheet" aria-label="Закрыть">${ICONS.close}</button>
+              </div>
+              <p class="cap">Нажми на любой текст, чтобы продолжить с того же места, или раскрой его кусочки.</p>
+              <ul class="hist-list">${listHtml}</ul>
+              <div class="btn-row" style="margin-top: 18px">
+                <button class="btn gh sm" data-a="open-input">+ Добавить новый текст</button>
+                <button class="btn gh sm" data-a="open-bookmarks">Журнал закладок</button>
+                <button class="btn gh sm" data-a="export-json">Экспорт JSON</button>
+                <button class="btn gh sm" data-a="import-json-trigger">Импорт JSON</button>
+              </div>
+            </div>
+          `;
+          return;
+        }
+
+        if (ui.sheet === "bookmarks") {
+          const bms = state.bookmarks_journal;
+          const flatAll = getAllBookmarkedSegmentsMap();
+          const isStreamActive = state.activeSource === "bookmarks" && state.activeBookmarkId === "__ALL__";
+
+          const streamBannerHtml = flatAll.length > 0 ? `
+            <div class="bm-stream-banner">
+              <div class="bm-stream-info">
+                <b>Единый поток всех закладок (${flatAll.length})</b>
+                <span>Листай все сохранённые мысли на слайдах, озвучивай с повтором, разделяй и склеивай</span>
+              </div>
+              <button class="btn sm" data-a="bm-open-stream">
+                ${isStreamActive ? "Открыто на слайдах" : "Открыть как слайд-шоу"}
+              </button>
+            </div>
+          ` : "";
+
+          const bmListHtml = bms.length === 0
+            ? `<p class="cap" style="padding: 16px 0;">В журнале закладок пока пусто. Нажми на значок закладки под любой мыслью на слайде или добавь текст ниже.</p>`
+            : `<ul class="hist-list">${bms.map(bm => {
+                const isAct = state.activeSource === "bookmarks" && state.activeBookmarkId === bm.id;
+                const isExp = ui.expandedBmId === bm.id;
+                const preview = bm.deconstruct_text[0] || bm.source_text.slice(0, 140);
+                const dateStr = new Date(bm.createdAt).toLocaleString("ru-RU", {
+                  day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit"
+                });
+
+                const chunksHtml = isExp ? `
+                  <ul class="chunks-list">
+                    ${bm.deconstruct_text.map((seg, idx) => `
+                      <li class="chunk-item">
+                        <span class="chunk-text" data-a="bm-jump" data-id="${bm.id}" data-idx="${idx}">
+                          ${esc(seg)}
+                        </span>
+                        <div class="chunk-btns">
+                          <button class="btn sm gh" data-a="bm-chunk-copy" data-id="${bm.id}" data-idx="${idx}" title="Скопировать">Копир.</button>
+                          <button class="btn sm gh" data-a="bm-chunk-speak" data-id="${bm.id}" data-idx="${idx}" title="Озвучить">🔊</button>
+                          ${idx < bm.deconstruct_text.length - 1 ? `
+                            <button class="btn sm gh" data-a="bm-chunk-merge" data-id="${bm.id}" data-idx="${idx}" title="Склеить со следующей мыслью">+</button>
+                          ` : ""}
+                        </div>
+                      </li>
+                    `).join("")}
+                  </ul>
+                ` : "";
+
+                return `
+                  <li class="hist-card${isAct ? " active" : ""}">
+                    <div class="hist-top">
+                      <button class="hist-preview" data-a="bm-select" data-id="${bm.id}">
+                        ${esc(preview.length > 160 ? preview.slice(0, 160) + "…" : preview)}
+                      </button>
+                    </div>
+                    <div class="hist-meta">
+                      <span>${dateStr} · ${bm.deconstruct_text.length > 1 ? `шаг ${(bm.currentIndex || 0) + 1} из ${bm.deconstruct_text.length}` : "1 мысль"}</span>
+                      <div class="hist-actions">
+                        <button class="btn sm gh" data-a="bm-toggle-chunks" data-id="${bm.id}">
+                          ${isExp ? "Скрыть кусочки" : `Кусочки (${bm.deconstruct_text.length})`}
+                        </button>
+                        <button class="btn sm gh" data-a="bm-copy-entry" data-id="${bm.id}" title="Скопировать">Копир.</button>
+                        <button class="btn sm gh" data-a="bm-speak-entry" data-id="${bm.id}" title="Озвучить с повтором">Озвучить</button>
+                        <button class="btn sm" data-a="bm-select" data-id="${bm.id}">На слайды</button>
+                        <button class="btn sm gh wn" data-a="bm-delete" data-id="${bm.id}" aria-label="Удалить из закладок">✕</button>
+                      </div>
+                    </div>
+                    ${chunksHtml}
+                  </li>
+                `;
+              }).join("")}</ul>`;
+
+          const addBmBoxHtml = ui.bmInputOpen ? `
+            <div class="sec" style="border-top: 1px solid var(--ln); padding-top: 14px;">
+              <p class="cap">Добавить и разбить текст сразу в журнал закладок</p>
+              <textarea id="bm-source-input" rows="4" placeholder="Вставь или напиши мысль либо список для журнала закладок...">${esc(ui.bmDraftText)}</textarea>
+              <div class="btn-row">
+                <button class="btn sm" data-a="run-bm-deconstruct" ${ui.aiBusy ? "disabled" : ""}>
+                  ${ui.aiBusy ? "Сохраняю…" : "Разбить и сохранить в закладки"}
+                </button>
+                <button class="btn gh sm" data-a="toggle-bm-input">Отмена</button>
+              </div>
+            </div>
+          ` : "";
+
+          sheetEl.innerHTML = `
+            <div class="sh" role="dialog" aria-modal="true">
+              <div class="shh">
+                <span>Журнал закладок (${bms.length})</span>
+                <button class="ic-b" data-a="close-sheet" aria-label="Закрыть">${ICONS.close}</button>
+              </div>
+              <p class="cap">Закладки сохраняются в базе данных браузера и имеют весь функционал обычных слайдов: листание, озвучка с повтором, разделение и склеивание.</p>
+              ${streamBannerHtml}
+              ${bmListHtml}
+              ${addBmBoxHtml}
+              <div class="btn-row" style="margin-top: 18px">
+                ${!ui.bmInputOpen ? `<button class="btn gh sm" data-a="toggle-bm-input">+ Добавить текст в закладки</button>` : ""}
+                ${state.activeSource === "bookmarks" ? `<button class="btn gh sm" data-a="switch-to-history">Вернуться к текстам</button>` : ""}
+                <button class="btn gh sm" data-a="export-json">Экспорт JSON</button>
+              </div>
+            </div>
+          `;
+          return;
+        }
+
+        if (ui.sheet === "settings") {
+          const s = state.settings;
+          const isCustomModel = !AVAILABLE_MODELS.includes(s.aiModel);
+
+          sheetEl.innerHTML = `
+            <div class="sh" role="dialog" aria-modal="true">
+              <div class="shh">
+                <span>Настройки</span>
+                <button class="ic-b" data-a="close-sheet" aria-label="Закрыть">${ICONS.close}</button>
+              </div>
+
+              <div class="sec" style="margin-top: 6px">
+                <p class="cap">Цветовая тема оформления</p>
+                <div class="seg-pills">
+                  <button class="pill${s.theme !== "light" ? " on" : ""}" data-a="set-theme" data-theme="dark">Тёмная (Глубокая ночь)</button>
+                  <button class="pill${s.theme === "light" ? " on" : ""}" data-a="set-theme" data-theme="light">Светлая (Тёплое молоко и тёмно-коричневый шрифт)</button>
+                </div>
+              </div>
+
+              <div class="sec">
+                <p class="cap">Шрифт и типографика</p>
+                <select data-c="font-family" aria-label="Выбор шрифта">
+                  ${AVAILABLE_FONTS.map(f => `<option value="${esc(f.id)}"${s.fontId === f.id ? " selected" : ""}>${esc(f.label)}</option>`).join("")}
+                </select>
+                <div class="grid-2" style="margin-top: 10px">
+                  <label class="cap">
+                    Размер текста: <b class="mono" id="lbl-fs">${s.fontSize}px</b>
+                    <input type="range" min="18" max="52" step="1" value="${s.fontSize}" data-i="font-size" data-c="font-size">
+                  </label>
+                  <label class="cap">
+                    Межстрочный: <b class="mono" id="lbl-lh">${s.lineHeight}</b>
+                    <input type="range" min="1.15" max="1.9" step="0.05" value="${s.lineHeight}" data-i="line-height" data-c="line-height">
+                  </label>
+                </div>
+              </div>
+
+              <div class="sec">
+                <p class="cap">ИИ и API-ключ Gemini (хранится локально в браузере)</p>
+                <input type="password" id="cfg-apikey" autocomplete="off" placeholder="AIzaSy... (ключ Gemini API)" value="${esc(s.apiKey)}">
+                <div class="grid-2" style="margin-top: 8px">
+                  <select id="cfg-model-select" data-c="model-select" aria-label="Выбор модели ИИ">
+                    ${AVAILABLE_MODELS.map(m => `<option value="${m}"${s.aiModel === m ? " selected" : ""}>${m}</option>`).join("")}
+                    <option value="__custom__"${isCustomModel ? " selected" : ""}>Своя модель…</option>
+                  </select>
+                  <input id="cfg-model-custom" placeholder="Имя модели, например gemini-2.5-flash" value="${esc(s.aiModel)}">
+                </div>
+                <div class="btn-row">
+                  <button class="btn sm" data-a="save-api-settings">Сохранить ключ и модель</button>
+                </div>
+              </div>
+
+              <div class="sec">
+                <p class="cap">Озвучка и интервальный плеер</p>
+                <label class="cap" style="display:block;margin-bottom:10px">
+                  Голос озвучки (активен: <b class="mono" style="color:var(--tx)">${esc(getActiveVoiceLabel())}</b>)
+                  <div style="display:flex;gap:8px;margin-top:6px">
+                    <select data-c="tts-voice" style="flex:1">
+                      ${buildVoiceOptionsHtml()}
+                    </select>
+                    <button class="btn gh sm" data-a="refresh-voices" title="Обновить голоса и проверить озвучку">Тест / ↻</button>
+                  </div>
+                </label>
+                <label class="chk" style="margin-bottom:10px">
+                  <input type="checkbox" data-c="tts-cloud"${state.settings.ttsCloud !== false ? " checked" : ""}>
+                  <span>☁ Облачный Edge TTS: потоковый звук с серверов Microsoft (текст уходит в интернет)</span>
+                </label>
+                <label class="cap" style="display:block;margin-bottom:10px">
+                  Прокси Edge TTS (необязательно; OpenAI-совместимый, напр. https://tts.example.com)
+                  <input type="text" data-c="tts-proxy" autocomplete="off" placeholder="https://…" value="${esc(state.settings.ttsProxyUrl || "")}" style="margin-top:6px">
+                  <input type="password" data-c="tts-proxykey" autocomplete="off" placeholder="Ключ прокси (если нужен)" value="${esc(state.settings.ttsProxyKey || "")}" style="margin-top:6px">
+                </label>
+                <p class="cap" style="line-height:1.5;opacity:.75;margin-bottom:10px">iOS: Настройки → Универсальный доступ → Устный контент → Голоса → Русский → скачайте Milena / Yuri (Улучшенный или Premium), затем нажмите «Тест / ↻» — все установленные варианты появятся в списке.</p>
+                <div class="grid-2">
+                  <label class="cap">
+                    Повторы по умолчанию (1–25 или ∞)
+                    <select data-c="tts-repeat">
+                      ${REPEATS.map(r => `<option value="${r}"${r === s.ttsRepeat ? " selected" : ""}>${r}</option>`).join("")}
+                    </select>
+                  </label>
+                  <label class="cap">
+                    Пауза между повторами: <b class="mono" data-tiv>${fmtSec(s.ttsIntervalSec)}</b>
+                    <input type="range" min="10" max="600" step="10" value="${s.ttsIntervalSec}" data-i="tts-iv" data-c="tts-iv">
+                  </label>
+                </div>
+              </div>
+
+              <div class="sec">
+                <p class="cap">Резервная копия базы данных и закладок (JSON)</p>
+                <div class="btn-row">
+                  <button class="btn gh sm" data-a="export-json">Скачать JSON</button>
+                  <button class="btn gh sm" data-a="copy-json">Скопировать JSON</button>
+                  <button class="btn gh sm" data-a="import-json-trigger">Загрузить JSON из файла</button>
+                </div>
+              </div>
+            </div>
+          `;
+          return;
+        }
+
+        if (ui.sheet === "split-current") {
+          const doc = currentDoc();
+          const currentThought = currentSegmentText();
+          const words = currentThought.split(/\s+/).filter(Boolean);
+          sheetEl.innerHTML = `
+            <div class="sh" role="dialog" aria-modal="true">
+              <div class="shh">
+                <span>Разделить мысль на две (слово в слово)</span>
+                <button class="ic-b" data-a="close-sheet" aria-label="Закрыть">${ICONS.close}</button>
+              </div>
+              <p class="cap">Нажми на слово, с которого должна начинаться вторая мысль:</p>
+              <div class="seg-pills" style="margin-top: 12px">
+                ${words.map((w, i) => i === 0 ? `<span class="pill" style="opacity:0.45;cursor:default">${esc(w)}</span>` : `
+                  <button class="pill" data-a="split-at-word" data-widx="${i}">${esc(w)}</button>
+                `).join("")}
+              </div>
+              ${doc && doc.deconstruct_text.length > 1 && doc.currentIndex < doc.deconstruct_text.length - 1 ? `
+                <div class="btn-row" style="margin-top: 18px">
+                  <button class="btn gh sm" data-a="merge-with-next">Склеить текущую мысль со следующей</button>
+                </div>
+              ` : ""}
+            </div>
+          `;
+          return;
+        }
+
+        if (ui.sheet === "jump") {
+          const doc = currentDoc();
+          if (!doc) return;
+          sheetEl.innerHTML = `
+            <div class="sh" role="dialog" aria-modal="true">
+              <div class="shh">
+                <span>Переход к мысли (${doc.currentIndex + 1} / ${doc.deconstruct_text.length})</span>
+                <button class="ic-b" data-a="close-sheet" aria-label="Закрыть">${ICONS.close}</button>
+              </div>
+              <input type="range" min="0" max="${doc.deconstruct_text.length - 1}" step="1" value="${doc.currentIndex}" data-i="jump-slider">
+              <ul class="chunks-list" style="margin-top: 14px">
+                ${doc.deconstruct_text.map((seg, idx) => `
+                  <li class="chunk-item" style="${idx === doc.currentIndex ? "border:1px solid var(--ac)" : ""}">
+                    <span class="chunk-text" data-a="active-doc-jump" data-idx="${idx}">
+                      ${esc(seg)}
+                    </span>
+                    <div class="chunk-btns">
+                      <button class="btn sm gh" data-a="jump-copy-item" data-idx="${idx}" title="Скопировать">Копир.</button>
+                    </div>
+                  </li>
+                `).join("")}
+              </ul>
+            </div>
+          `;
+        }
+      }
+
+      // ——— ЭКСПОРТ И ИМПОРТ JSON ———
+      function getExportPayload() {
+        return JSON.stringify({
+          app: "meaning-visualizer",
+          v: 2,
+          exportedAt: new Date().toISOString(),
+          activeSource: state.activeSource,
+          activeId: state.activeId,
+          activeBookmarkId: state.activeBookmarkId,
+          log_input_history: state.log_input_history,
+          bookmarks_journal: state.bookmarks_journal,
+          settings: {
+            theme: state.settings.theme,
+            aiModel: state.settings.aiModel,
+            splitMode: state.settings.splitMode,
+            fontId: state.settings.fontId,
+            fontSize: state.settings.fontSize,
+            lineHeight: state.settings.lineHeight,
+            maxWidth: state.settings.maxWidth,
+            ttsVoiceURI: state.settings.ttsVoiceURI,
+            ttsCloud: state.settings.ttsCloud,
+            ttsRate: state.settings.ttsRate,
+            ttsIntervalSec: state.settings.ttsIntervalSec,
+            ttsRepeat: state.settings.ttsRepeat,
+            ttsAutoNext: state.settings.ttsAutoNext
+          }
+        }, null, 2);
+      }
+
+      function downloadJson() {
+        const data = getExportPayload();
+        const blob = new Blob([data], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `smysly-${new Date().toISOString().slice(0, 10)}.json`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 3000);
+        toast("JSON сохранён");
+      }
+
+      function importJsonText(rawText) {
+        try {
+          const d = JSON.parse(String(rawText).trim());
+          let importedHistory = [];
+          let importedBookmarks = [];
+
+          if (Array.isArray(d.log_input_history)) {
+            importedHistory = d.log_input_history.filter(x => x && Array.isArray(x.deconstruct_text) && x.deconstruct_text.length);
+          } else if (Array.isArray(d.deconstruct_text) && d.deconstruct_text.length) {
+            importedHistory = [{
+              id: uid(),
+              createdAt: Date.now(),
+              source_text: d.source_text || d.deconstruct_text.join(" "),
+              deconstruct_text: d.deconstruct_text.map(String),
+              currentIndex: 0,
+              mode: "sentences"
+            }];
+          }
+
+          if (Array.isArray(d.bookmarks_journal)) {
+            importedBookmarks = d.bookmarks_journal.filter(x => x && Array.isArray(x.deconstruct_text) && x.deconstruct_text.length);
+          }
+
+          if (!importedHistory.length && !importedBookmarks.length) {
+            toast("В JSON не найдено текстов или закладок");
+            return;
+          }
+
+          const existingIds = new Set(state.log_input_history.map(x => x.id));
+          for (const item of importedHistory) {
+            if (!item.id || existingIds.has(item.id)) item.id = uid();
+            item.currentIndex = Math.min(Math.max(0, Number(item.currentIndex) || 0), item.deconstruct_text.length - 1);
+            state.log_input_history.unshift(item);
+          }
+
+          const existingBmIds = new Set(state.bookmarks_journal.map(x => x.id));
+          for (const bm of importedBookmarks) {
+            if (!bm.id || existingBmIds.has(bm.id)) bm.id = uid();
+            bm.currentIndex = Math.min(Math.max(0, Number(bm.currentIndex) || 0), bm.deconstruct_text.length - 1);
+            state.bookmarks_journal.unshift(bm);
+          }
+
+          if (importedHistory.length) {
+            state.activeId = importedHistory[0].id;
+            state.activeSource = "history";
+          } else if (importedBookmarks.length) {
+            state.activeSource = "bookmarks";
+          }
+
+          if (d.settings && typeof d.settings === "object") {
+            const keepKey = state.settings.apiKey;
+            Object.assign(state.settings, d.settings, { apiKey: d.settings.apiKey || keepKey });
+          }
+
+          commit();
+          closeSheet();
+          render();
+          toast(`Импортировано: текстов — ${importedHistory.length}, закладок — ${importedBookmarks.length}`);
+        } catch {
+          toast("Ошибка чтения JSON-файла");
+        }
+      }
+
+      // ——— УВЕДОМЛЕНИЯ ———
+      let toastTimer = 0;
+      function toast(msg) {
+        tsEl.textContent = msg;
+        tsEl.hidden = false;
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          tsEl.hidden = true;
+        }, 2500);
+      }
+
+      // ——— ОБРАБОТЧИКИ СОБЫТИЙ ———
+      document.addEventListener("click", async (e) => {
+        const el = e.target.closest?.("[data-a]");
+        if (!el) return;
+        const act = el.dataset.a;
+
+        if (act === "prev") stepSlide(-1);
+        else if (act === "next") stepSlide(1);
+        else if (act === "tts-toggle") startTtsForCurrentThought();
+        else if (act === "copy-current") {
+          const doc = currentDoc();
+          const segKey = `${state.activeSource}:${doc?.id}:${doc?.currentIndex}`;
+          copyTextToClipboard(currentSegmentText(), segKey);
+        }
+        else if (act === "bookmark-toggle") {
+          toggleBookmarkForThought(currentSegmentText());
+        }
+        else if (act === "toggle-theme") {
+          state.settings.theme = state.settings.theme === "light" ? "dark" : "light";
+          commit();
+          render();
+          toast(state.settings.theme === "light" ? "Светлая тема (Тёплое молоко)" : "Тёмная тема");
+        }
+        else if (act === "set-theme") {
+          state.settings.theme = el.dataset.theme === "light" ? "light" : "dark";
+          commit();
+          render();
+        }
+        else if (act === "open-input") {
+          ui.draftText = "";
+          openSheet("input");
+          setTimeout(() => document.getElementById("source-input")?.focus(), 40);
+        }
+        else if (act === "open-history") openSheet("history");
+        else if (act === "open-bookmarks") openSheet("bookmarks");
+        else if (act === "open-settings") openSheet("settings");
+        else if (act === "open-jump") openSheet("jump");
+        else if (act === "open-split-current") openSheet("split-current");
+        else if (act === "close-sheet") closeSheet();
+        else if (act === "close-bg" && e.target === sheetEl) closeSheet();
+        else if (act === "switch-to-history") {
+          state.activeSource = "history";
+          commit();
+          closeSheet();
+          render();
+        }
+        else if (act === "set-mode") {
+          ui.draftText = document.getElementById("source-input")?.value ?? ui.draftText;
+          state.settings.splitMode = el.dataset.m;
+          commit();
+          renderSheet();
+        }
+        else if (act === "run-deconstruct") {
+          const inp = document.getElementById("source-input");
+          const raw = (inp?.value ?? ui.draftText).trim();
+          if (!raw) {
+            toast("Введи или вставь текст");
+            return;
+          }
+          ui.draftText = raw;
+          ui.aiBusy = true;
+          renderSheet();
+          const segments = await deconstruct_text(raw, state.settings.splitMode);
+          ui.aiBusy = false;
+          if (!segments.length) {
+            toast("Не удалось выделить мысли");
+            renderSheet();
+            return;
+          }
+          const newEntry = {
+            id: uid(),
+            createdAt: Date.now(),
+            source_text: raw,
+            deconstruct_text: segments,
+            currentIndex: 0,
+            mode: state.settings.splitMode
+          };
+          state.log_input_history.unshift(newEntry);
+          state.activeId = newEntry.id;
+          state.activeSource = "history";
+          ui.draftText = "";
+          commit();
+          closeSheet();
+          render();
+        }
+        else if (act === "toggle-bm-input") {
+          ui.bmInputOpen = !ui.bmInputOpen;
+          renderSheet();
+          if (ui.bmInputOpen) {
+            setTimeout(() => document.getElementById("bm-source-input")?.focus(), 40);
+          }
+        }
+        else if (act === "run-bm-deconstruct") {
+          const inp = document.getElementById("bm-source-input");
+          const raw = (inp?.value ?? ui.bmDraftText).trim();
+          if (!raw) {
+            toast("Введи или вставь текст для закладки");
+            return;
+          }
+          ui.bmDraftText = raw;
+          ui.aiBusy = true;
+          renderSheet();
+          const segments = await deconstruct_text(raw, state.settings.splitMode);
+          ui.aiBusy = false;
+          if (!segments.length) {
+            toast("Не удалось выделить мысли");
+            renderSheet();
+            return;
+          }
+          const newBm = {
+            id: uid(),
+            createdAt: Date.now(),
+            source_text: raw,
+            deconstruct_text: segments,
+            currentIndex: 0,
+            mode: state.settings.splitMode
+          };
+          state.bookmarks_journal.unshift(newBm);
+          ui.bmDraftText = "";
+          ui.bmInputOpen = false;
+          commit();
+          render();
+          toast("Добавлено в журнал закладок");
+        }
+        else if (act === "bm-open-stream") {
+          state.activeSource = "bookmarks";
+          state.activeBookmarkId = "__ALL__";
+          state.bookmarksStreamIndex = 0;
+          commit();
+          closeSheet();
+          render();
+        }
+        else if (act === "bm-select") {
+          const id = el.dataset.id;
+          const bm = state.bookmarks_journal.find(x => x.id === id);
+          if (!bm) return;
+          state.activeSource = "bookmarks";
+          // Если у закладки несколько кусочков, открываем её как документ; если 1 мысль — открываем поток всех закладок на этой мысли, чтобы работали < и > по всем закладкам!
+          if (bm.deconstruct_text.length > 1) {
+            state.activeBookmarkId = bm.id;
+          } else {
+            state.activeBookmarkId = "__ALL__";
+            const flat = getAllBookmarkedSegmentsMap();
+            const pos = flat.findIndex(x => x.bmId === bm.id);
+            state.bookmarksStreamIndex = pos !== -1 ? pos : 0;
+          }
+          commit();
+          closeSheet();
+          render();
+        }
+        else if (act === "bm-toggle-chunks") {
+          const id = el.dataset.id;
+          ui.expandedBmId = ui.expandedBmId === id ? null : id;
+          renderSheet();
+        }
+        else if (act === "bm-jump") {
+          const id = el.dataset.id;
+          const idx = Number(el.dataset.idx) || 0;
+          const bm = state.bookmarks_journal.find(x => x.id === id);
+          if (bm) {
+            state.activeSource = "bookmarks";
+            if (bm.deconstruct_text.length > 1) {
+              state.activeBookmarkId = bm.id;
+              bm.currentIndex = idx;
+            } else {
+              state.activeBookmarkId = "__ALL__";
+              const flat = getAllBookmarkedSegmentsMap();
+              const pos = flat.findIndex(x => x.bmId === bm.id && x.chunkIdx === idx);
+              state.bookmarksStreamIndex = pos !== -1 ? pos : 0;
+            }
+            commit();
+            closeSheet();
+            render();
+          }
+        }
+        else if (act === "bm-copy-entry") {
+          const bm = state.bookmarks_journal.find(x => x.id === el.dataset.id);
+          if (bm) copyTextToClipboard(bm.deconstruct_text.join("\n\n"));
+        }
+        else if (act === "bm-speak-entry") {
+          const bm = state.bookmarks_journal.find(x => x.id === el.dataset.id);
+          if (bm) {
+            const txt = bm.deconstruct_text[bm.currentIndex || 0] || bm.deconstruct_text[0];
+            startTtsForText(txt, `bm:${bm.id}:${bm.currentIndex || 0}`);
+          }
+        }
+        else if (act === "bm-chunk-copy") {
+          const bm = state.bookmarks_journal.find(x => x.id === el.dataset.id);
+          const idx = Number(el.dataset.idx) || 0;
+          if (bm && bm.deconstruct_text[idx]) {
+            copyTextToClipboard(bm.deconstruct_text[idx]);
+          }
+        }
+        else if (act === "bm-chunk-speak") {
+          const bm = state.bookmarks_journal.find(x => x.id === el.dataset.id);
+          const idx = Number(el.dataset.idx) || 0;
+          if (bm && bm.deconstruct_text[idx]) {
+            startTtsForText(bm.deconstruct_text[idx], `bm:${bm.id}:${idx}`);
+          }
+        }
+        else if (act === "bm-chunk-merge") {
+          const bm = state.bookmarks_journal.find(x => x.id === el.dataset.id);
+          const idx = Number(el.dataset.idx);
+          if (bm && idx >= 0 && idx < bm.deconstruct_text.length - 1) {
+            bm.deconstruct_text.splice(idx, 2, `${bm.deconstruct_text[idx]} ${bm.deconstruct_text[idx + 1]}`);
+            bm.source_text = bm.deconstruct_text.join(" ");
+            if (bm.currentIndex >= bm.deconstruct_text.length) {
+              bm.currentIndex = bm.deconstruct_text.length - 1;
+            }
+            commit();
+            render();
+          }
+        }
+        else if (act === "bm-delete") {
+          const id = el.dataset.id;
+          state.bookmarks_journal = state.bookmarks_journal.filter(x => x.id !== id);
+          if (state.activeBookmarkId === id) {
+            state.activeBookmarkId = "__ALL__";
+          }
+          if (state.bookmarks_journal.length === 0 && state.activeSource === "bookmarks") {
+            state.activeSource = "history";
+          }
+          commit();
+          render();
+          toast("Закладка удалена");
+        }
+        else if (act === "hist-select") {
+          state.activeSource = "history";
+          state.activeId = el.dataset.id;
+          commit();
+          closeSheet();
+          render();
+        }
+        else if (act === "hist-toggle-chunks") {
+          const id = el.dataset.id;
+          ui.expandedHistId = ui.expandedHistId === id ? null : id;
+          renderSheet();
+        }
+        else if (act === "hist-jump") {
+          const id = el.dataset.id;
+          const idx = Number(el.dataset.idx) || 0;
+          const doc = state.log_input_history.find(x => x.id === id);
+          if (doc) {
+            state.activeSource = "history";
+            state.activeId = doc.id;
+            doc.currentIndex = idx;
+            commit();
+            closeSheet();
+            render();
+          }
+        }
+        else if (act === "active-doc-jump") {
+          const idx = Number(el.dataset.idx) || 0;
+          const doc = currentDoc();
+          if (doc) {
+            doc.currentIndex = idx;
+            commit();
+            closeSheet();
+            render();
+          }
+        }
+        else if (act === "jump-copy-item") {
+          const idx = Number(el.dataset.idx) || 0;
+          const doc = currentDoc();
+          if (doc && doc.deconstruct_text[idx]) {
+            copyTextToClipboard(doc.deconstruct_text[idx]);
+          }
+        }
+        else if (act === "chunk-copy") {
+          const doc = state.log_input_history.find(x => x.id === el.dataset.id);
+          const idx = Number(el.dataset.idx) || 0;
+          if (doc && doc.deconstruct_text[idx]) {
+            copyTextToClipboard(doc.deconstruct_text[idx]);
+          }
+        }
+        else if (act === "chunk-bookmark") {
+          const doc = state.log_input_history.find(x => x.id === el.dataset.id);
+          const idx = Number(el.dataset.idx) || 0;
+          if (doc && doc.deconstruct_text[idx]) {
+            toggleBookmarkForThought(doc.deconstruct_text[idx]);
+          }
+        }
+        else if (act === "hist-delete") {
+          const id = el.dataset.id;
+          if (state.log_input_history.length <= 1) return;
+          state.log_input_history = state.log_input_history.filter(x => x.id !== id);
+          if (state.activeId === id) state.activeId = state.log_input_history[0].id;
+          commit();
+          render();
+        }
+        else if (act === "chunk-merge") {
+          const doc = state.log_input_history.find(x => x.id === el.dataset.id);
+          const idx = Number(el.dataset.idx);
+          if (doc && idx >= 0 && idx < doc.deconstruct_text.length - 1) {
+            doc.deconstruct_text.splice(idx, 2, `${doc.deconstruct_text[idx]} ${doc.deconstruct_text[idx + 1]}`);
+            if (doc.currentIndex >= doc.deconstruct_text.length) {
+              doc.currentIndex = doc.deconstruct_text.length - 1;
+            }
+            commit();
+            render();
+          }
+        }
+        else if (act === "split-at-word") {
+          const widx = Number(el.dataset.widx);
+          if (widx > 0) {
+            splitCurrentThoughtAtWord(widx);
+            closeSheet();
+            render();
+          }
+        }
+        else if (act === "merge-with-next") {
+          mergeCurrentThoughtWithNext();
+          closeSheet();
+          render();
+        }
+        else if (act === "save-api-settings") {
+          const key = document.getElementById("cfg-apikey")?.value.trim() || "";
+          const model = document.getElementById("cfg-model-custom")?.value.trim() || "gemini-2.5-flash";
+          state.settings.apiKey = key;
+          state.settings.aiModel = model;
+          commit();
+          toast("API-ключ и модель сохранены");
+        }
+        else if (act === "refresh-voices") {
+          await ensureVoicesLoaded(1600);
+          refreshVoices();
+          barEl.dataset.sig = "";
+          renderBar();
+          if (ui.sheet === "settings") renderSheet();
+          cloud.down = 0;
+          cloud.told = false;
+          toast("Активен голос: " + getActiveVoiceLabel());
+          startTtsForCurrentThought();
+        }
+        else if (act === "export-json") downloadJson();
+        else if (act === "copy-json") {
+          try {
+            await navigator.clipboard.writeText(getExportPayload());
+            toast("JSON скопирован в буфер обмена");
+          } catch {
+            toast("Не удалось скопировать");
+          }
+        }
+        else if (act === "import-json-trigger") {
+          document.getElementById("json-file")?.click();
+        }
+        else if (act === "pl-play-tog") {
+          if (!ttsRun) return;
+          const playing = (ttsRun.speaking || ttsRun.nextAt > 0) && !ttsRun.paused;
+          if (playing) ttsPause();
+          else ttsResume();
+        }
+        else if (act === "pl-expand-tog") {
+          state.settings.playerExpanded = !state.settings.playerExpanded;
+          commit();
+          renderBar();
+        }
+        else if (act === "pl-collapse-tog") {
+          state.settings.playerCollapsed = !state.settings.playerCollapsed;
+          commit();
+          renderBar();
+        }
+        else if (act === "pl-close") {
+          ttsStop();
+        }
+      });
+
+      document.addEventListener("input", (e) => {
+        const el = e.target;
+        const k = el.dataset?.i;
+        if (el.id === "source-input") {
+          ui.draftText = el.value;
+          return;
+        }
+        if (el.id === "bm-source-input") {
+          ui.bmDraftText = el.value;
+          return;
+        }
+        if (k === "font-size") {
+          state.settings.fontSize = Number(el.value);
+          const lbl = document.getElementById("lbl-fs");
+          if (lbl) lbl.textContent = `${el.value}px`;
+          applyTypographyAndTheme();
+        } else if (k === "line-height") {
+          state.settings.lineHeight = Number(el.value);
+          const lbl = document.getElementById("lbl-lh");
+          if (lbl) lbl.textContent = el.value;
+          applyTypographyAndTheme();
+        } else if (k === "tts-iv") {
+          document.querySelectorAll("[data-tiv]").forEach(n => {
+            n.textContent = fmtSec(el.value);
+          });
+        } else if (k === "tts-rate") {
+          const out = document.querySelector("[data-trate]");
+          if (out) out.textContent = `${Number(el.value).toFixed(1)}×`;
+        } else if (k === "jump-slider") {
+          const doc = currentDoc();
+          if (doc) {
+            doc.currentIndex = Number(el.value) || 0;
+            commit();
+            render();
+          }
+        }
+      });
+
+      document.addEventListener("change", (e) => {
+        const el = e.target;
+        const c = el.dataset?.c;
+        if (c === "font-family") {
+          state.settings.fontId = el.value;
+          commit();
+          render();
+        } else if (c === "font-size" || c === "line-height") {
+          commit();
+        } else if (c === "model-select") {
+          if (el.value !== "__custom__") {
+            const customInp = document.getElementById("cfg-model-custom");
+            if (customInp) customInp.value = el.value;
+            state.settings.aiModel = el.value;
+            commit();
+          }
+        } else if (c === "tts-voice") {
+          state.settings.ttsVoiceURI = el.value;
+          commit();
+          barEl.dataset.sig = "";
+          renderBar();
+          if (ui.sheet === "settings") renderSheet();
+          if (ttsRun && !ttsRun.paused) {
+            ttsSay(ttsRun);
+          }
+        } else if (c === "tts-repeat") {
+          state.settings.ttsRepeat = el.value;
+          if (ttsRun) {
+            ttsRun.max = el.value === "∞" ? Infinity : Number(el.value) || 1;
+          }
+          commit();
+          renderBar();
+        } else if (c === "tts-iv") {
+          state.settings.ttsIntervalSec = Math.min(TTS_GAP_MAX, Math.max(TTS_GAP_MIN, Number(el.value) || TTS_GAP_MIN));
+          commit();
+          renderBar();
+        } else if (c === "tts-rate") {
+          state.settings.ttsRate = Math.min(2, Math.max(0.5, Number(el.value) || 1));
+          commit();
+          renderBar();
+        } else if (c === "tts-cloud") {
+          state.settings.ttsCloud = !!el.checked;
+          cloud.down = 0;
+          commit();
+          barEl.dataset.sig = "";
+          renderBar();
+          if (ui.sheet === "settings") renderSheet();
+        } else if (c === "tts-proxy") {
+          state.settings.ttsProxyUrl = el.value.trim();
+          cloud.down = 0;
+          commit();
+        } else if (c === "tts-proxykey") {
+          state.settings.ttsProxyKey = el.value.trim();
+          commit();
+        } else if (c === "tts-autonext") {
+          state.settings.ttsAutoNext = !!el.checked;
+          commit();
+        }
+      });
+
+      document.getElementById("json-file")?.addEventListener("change", async (e) => {
+        const file = e.target.files?.[0];
+        e.target.value = "";
+        if (!file) return;
+        try {
+          const txt = await file.text();
+          importJsonText(txt);
+        } catch {
+          toast("Не удалось прочитать файл");
+        }
+      });
+
+      // Клавиатурная навигация
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && ui.sheet) {
+          closeSheet();
+          return;
+        }
+        if (e.ctrlKey || e.metaKey || e.altKey) return;
+        if (ui.sheet || ["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement?.tagName)) return;
+
+        const key = e.key.toLowerCase();
+        if (e.key === "ArrowRight" || e.key === " ") {
+          e.preventDefault();
+          stepSlide(1);
+        } else if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          stepSlide(-1);
+        } else if (key === "n" || key === "т") {
+          e.preventDefault();
+          openSheet("input");
+        } else if (key === "h" || key === "р") {
+          e.preventDefault();
+          openSheet("history");
+        } else if (key === "b" || key === "и") {
+          e.preventDefault();
+          openSheet("bookmarks");
+        } else if (key === "s" || key === "ы") {
+          e.preventDefault();
+          openSheet("settings");
+        } else if (key === "t" || key === "е") {
+          e.preventDefault();
+          state.settings.theme = state.settings.theme === "light" ? "dark" : "light";
+          commit();
+          render();
+        } else if (key === "d" || key === "в") {
+          e.preventDefault();
+          toggleBookmarkForThought(currentSegmentText());
+        } else if ((key === "c" || key === "с") && !window.getSelection()?.toString()) {
+          e.preventDefault();
+          const doc = currentDoc();
+          const segKey = `${state.activeSource}:${doc?.id}:${doc?.currentIndex}`;
+          copyTextToClipboard(currentSegmentText(), segKey);
+        }
+      });
+
+      // Свайпы влево/вправо на тач-экранах
+      let touchStartX = null;
+      let touchStartY = null;
+      document.addEventListener("touchstart", (e) => {
+        if (ui.sheet || e.target.closest("#bar")) {
+          touchStartX = null;
+          return;
+        }
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+
+      document.addEventListener("touchend", (e) => {
+        if (touchStartX == null) return;
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        const dy = e.changedTouches[0].clientY - touchStartY;
+        touchStartX = null;
+        if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+          stepSlide(dx < 0 ? 1 : -1);
+        }
+      }, { passive: true });
+
+      // Авто-затухание интерфейса в покое (Zen-режим)
+      let idleTimer = 0;
+      function wakeUi() {
+        document.body.classList.remove("idle");
+        clearTimeout(idleTimer);
+        idleTimer = setTimeout(() => {
+          if (!ui.sheet) document.body.classList.add("idle");
+        }, 3200);
+      }
+      ["mousemove", "pointerdown", "keydown", "touchstart"].forEach(ev => {
+        document.addEventListener(ev, wakeUi, { passive: true });
+      });
+
+      wakeUi();
+      render();
+    })();
+  </script>
+</body>
+</html>
